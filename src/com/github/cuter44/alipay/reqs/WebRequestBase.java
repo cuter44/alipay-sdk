@@ -2,7 +2,6 @@ package com.github.cuter44.alipay.reqs;
 
 import java.util.List;
 import java.util.Properties;
-import java.util.Iterator;
 import java.io.UnsupportedEncodingException;
 
 import com.github.cuter44.alipay.util.URLBuilder;
@@ -47,12 +46,10 @@ public abstract class WebRequestBase extends RequestBase
         throws UnsupportedEncodingException
     {
         URLBuilder ub = new URLBuilder();
-        Iterator<String> iter = paramNames.iterator();
 
         ub.appendPath(URL_ALIPAY_GATEWAY);
-        while (iter.hasNext())
+        for (String key:paramNames)
         {
-            String key = iter.next();
             String value = this.getProperty(key);
 
             if (value!=null)
@@ -66,12 +63,10 @@ public abstract class WebRequestBase extends RequestBase
         throws UnsupportedEncodingException
     {
         URLBuilder ub = new URLBuilder();
-        Iterator<String> iter = paramNames.iterator();
 
         ub.appendPath(URL_ALIPAY_GATEWAY);
-        while (iter.hasNext())
+        for (String key:paramNames)
         {
-            String key = iter.next();
             String value = this.getProperty(key);
 
             if (value!=null)

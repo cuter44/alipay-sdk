@@ -38,7 +38,17 @@ public enum AlipayErrorCode
     ILLEGAL_REQUEST_REFERER         (-30,"防钓鱼检查不支持该请求来源"),
     ILLEGAL_ANTI_PHISHING_KEY       (-31,"防钓鱼检查非法时间戳参数"),
     ANTI_PHISHING_KEY_TIMEOUT       (-32,"防钓鱼检查时间戳超时"),
-    ILLEGAL_EXTER_INVOKE_IP         (-33,"防钓鱼检查非法外部调用 IP");
+    ILLEGAL_EXTER_INVOKE_IP         (-33,"防钓鱼检查非法外部调用 IP"),
+    SYSTEM_EXCEPTION                (-34,"系统异常"),
+    COMMON_PARAMS_ILLEGAL           (-35,"通用参数中少了如 service、partner 等必填参数"),
+    SIGN_ILLEGAL                    (-36,"签名不正确"),
+    SERVICE_NOT_EXIST               (-37,"不存在对应的 service"),
+    REQ_DATA_ILLEGAL                (-38,"req_data 没有按照<req>…<req>格式要求填写"),
+    PARTNER_ILLEGAL                 (-39,"合作伙伴没有开通接口访问权限"),
+    SEC_ID_NOT_EXIST                (-40,"不存在对应的 sec_id"),
+    BIZ_PARAMS_ILLEGAL              (-41,"缺少了非空的业务参数"),
+    BIZ_PARAMS_TOO_LONG             (-42,"业务参数超出长度限制"),
+    SELLER_ACCOUNT_NOT_MATCH        (-43,"卖家账号不匹配");
 
   // FIELDS
     private int code;

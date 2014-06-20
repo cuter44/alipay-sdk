@@ -4,27 +4,52 @@ import java.util.Properties;
 
 public class ResponseBase
 {
+  // STRING
     protected String respString;
-    protected Properties respProp;
-
     /**
      * retrieve callback params or response content as String
      */
     public String getString()
     {
-        throw(new UnsupportedOperationException("getString() not implemented"));
+        return(this.respString);
     }
+
+  // PROPERTIES
+    protected Properties respProp;
 
     /**
      * retrieve callback params or response content as Properties
      */
     public Properties getProperties()
     {
-        throw(new UnsupportedOperationException("getProperties() not implemented"));
+        return(this.respProp);
     }
 
-    public static void main(String[] args)
+  // CONSTRUCT
+    public ResponseBase()
     {
-        System.out.println("Hello World!");
+        return;
+    }
+
+    public ResponseBase(String aRespString)
+    {
+        this(aRespString, null);
+
+        return;
+    }
+
+    public ResponseBase(Properties aRespProp)
+    {
+        this(null, aRespProp);
+
+        return;
+    }
+
+    public ResponseBase(String aRespString, Properties aRespProp)
+    {
+        this.respString = aRespString;
+        this.respProp = aRespProp;
+
+        return;
     }
 }

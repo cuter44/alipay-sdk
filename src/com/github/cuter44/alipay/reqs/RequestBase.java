@@ -3,7 +3,6 @@ package com.github.cuter44.alipay.reqs;
 import java.util.Properties;
 import java.util.List;
 import java.util.Map;
-import java.util.Iterator;
 import java.net.URL;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -108,11 +107,9 @@ public abstract class RequestBase
     protected String toQueryString(List<String> paramNames)
     {
         URLBuilder ub = new URLBuilder();
-        Iterator<String> iter= paramNames.iterator();
 
-        while (iter.hasNext())
+        for (String key:paramNames)
         {
-            String key = iter.next();
             String value = this.getProperty(key);
 
             if (value!=null)

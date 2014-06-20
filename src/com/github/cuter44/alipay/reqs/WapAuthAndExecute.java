@@ -1,48 +1,30 @@
 package com.github.cuter44.alipay.reqs;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
-import java.net.URISyntaxException;
 import java.io.UnsupportedEncodingException;
 
-import org.apache.http.client.fluent.*;
+import com.github.cuter44.alipay.resps.ResponseBase;
+import com.github.cuter44.alipay.AlipayException;
 
-import com.github.cuter44.alipay.*;
-import com.github.cuter44.alipay.resps.*;
-
-public class WapTradeCreateDirect extends WapRequestBase
+public class WapAuthAndExecute extends WapRequestBase
 {
   // CONSTANTS
     public static final List<String> KEYS_PARAM_NAME = Arrays.asList(
         "format",
         "partner",
         "req_data",
-        "req_id",
         "sec_id",
         "service",
         "v"
     );
-    public static final List<String> TAGNAMES_REQ_DATA = Arrays.asList(
-        "call_back_uri",
-        "merchant_url",
-        "notify_url",
-        "out_trade_no",
-        "pay_expire",
-        "seller_account_name",
-        "subject",
-        "total_fee"
-    );
-    public static final String TAGNAME_REQ_DATA_ROOT = "direct_trade_create_req";
 
-  // CONSTRUCT
-    public WapTradeCreateDirect(Properties prop)
-    {
-        super(prop);
-        this.setProperty("service", "alipay.wap.trade.create.direct")
-            .setProperty("format" , "xml")
-            .setProperty("v"      , "2.0");
-    }
+    public static final List<String> TAGNAMES_REQ_DATA = Arrays.asList(
+        "request_token"
+    );
+
+    public static final String TAGNAME_REQ_DATA_ROOT = "auth_and_execute_req";
 
   // BUILD
     @Override
@@ -50,6 +32,17 @@ public class WapTradeCreateDirect extends WapRequestBase
     {
         this.buildReqData(TAGNAMES_REQ_DATA, TAGNAME_REQ_DATA_ROOT);
         return(this);
+    }
+
+  // CONSTRUCT
+    public WapAuthAndExecute(Properties aConf)
+    {
+        super(aConf);
+        this.setProperty("service", "alipay.wap.auth.authAndExecute")
+            .setProperty("format" , "xml")
+            .setProperty("v"      , "2.0");
+
+        return;
     }
 
   // SIGN
@@ -72,5 +65,10 @@ public class WapTradeCreateDirect extends WapRequestBase
     }
 
   // EXECUTE
-    // use default
+    @Override
+    public ResponseBase execute()
+        throws AlipayException
+    {
+        throw(new UnsupportedOperationException("This request should run on client."));
+    }
 }

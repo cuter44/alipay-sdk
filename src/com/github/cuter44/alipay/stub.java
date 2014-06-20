@@ -3,8 +3,8 @@ package com.github.cuter44.alipay;
 import java.util.Properties;
 import java.util.Random;
 
-
 import com.github.cuter44.alipay.reqs.*;
+import com.github.cuter44.alipay.resps.*;
 
 public class stub
 {
@@ -34,7 +34,7 @@ public class stub
         }
     }
 
-    public static String demoWapTradeCreateDirect()
+    public static ResponseBase demoWapTradeCreateDirect()
     {
         Random rand = new Random();
 
@@ -47,6 +47,23 @@ public class stub
                 .setProperty("total_fee",           "0.01")
                 .setProperty("subject",             "交易功能测试")
                 .setProperty("call_back_url",       "http://www.douban.com/people/51983043");
+            return(req.build().sign().execute());
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return(null);
+        }
+    }
+
+    public static String demoWapAuthAndExecute(Properties prop)
+    {
+        Random rand = new Random();
+
+        try{
+            AlipayFactory factory = new AlipayFactory();
+
+            RequestBase req = factory.newWapAuthAndExecute(prop);
             return(req.build().sign().toURL());
         }
         catch (Exception ex)
@@ -76,7 +93,13 @@ public class stub
 
     public static void main(String[] args)
     {
-        shellExecuteWindows(demoTradeCreateByBuyer());
-        //shellExecuteWindows(demoWapTradeCreateDirect());
+        // TESTCASE 1
+        //shellExecuteWindows(demoTradeCreateByBuyer());
+
+        // TESTCASE 4
+        shellExecuteWindows(
+            demoWapAuthAndExecute(
+                demoWapTradeCreateDirect().getProperties()
+        ));
     }
 }

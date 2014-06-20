@@ -1,0 +1,23 @@
+# sign
+# ↓ here goes your private key
+KEY=ghdhn3n0nqc75vwh################
+# ↓ currently MD5 supported only
+sign_type=MD5
+sec_id=MD5
+
+# PID
+# PID not actually used, fill other parameter follow this↓ sample
+#PID=2088411570944601
+partner=2088411570944601
+seller_id=2088411570944601
+seller_account_name=name@host.com
+
+_input_charset=utf-8
+
+#notify_url=
+#return_url=
+
+# You can also fill other required but annoying parameter here.
+# Parameters passed by config file WILL BE OVERRIDED by it passed inline.
+
+# After all, don't forget to change filename to alipay.properties ^_^

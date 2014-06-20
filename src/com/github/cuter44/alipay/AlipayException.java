@@ -13,6 +13,13 @@ public class AlipayException extends RuntimeException
         return;
     }
 
+    public AlipayException(Throwable cause)
+    {
+        this.initCause(cause);
+
+        return;
+    }
+
     public AlipayException(AlipayErrorCode aErrorCode, Throwable cause)
     {
         this.errorCode = aErrorCode;

@@ -2,10 +2,15 @@ package com.github.cuter44.alipay.reqs;
 
 import java.util.List;
 import java.util.Properties;
-import java.util.Iterator;
 import java.io.UnsupportedEncodingException;
 
 import com.github.cuter44.alipay.util.URLBuilder;
+import org.apache.http.client.fluent.*;
+
+import com.github.cuter44.alipay.AlipayException;
+import com.github.cuter44.alipay.resps.ResponseBase;
+import static com.github.cuter44.alipay.util.HttpParamParser.parseHttpParam;
+import static com.github.cuter44.alipay.util.XMLParser.parseXML;
 
 public abstract class WapRequestBase extends RequestBase
 {
@@ -14,18 +19,17 @@ public abstract class WapRequestBase extends RequestBase
     public static final String PROPKEY_SIGN_TYPE    = "sec_id";
     public static final String PROPKEY_SIGN         = "sign";
     public static final String PROPKEY_REQ_DATA     = "req_data";
+    public static final String PROPKEY_RES_DATA     = "res_data";
     public static final String URL_ALIPAY_GATEWAY   = "http://wappaygw.alipay.com/service/rest.htm";
 
   // BUILD
     protected void buildReqData(List<String> paramNames, String rootTag)
     {
         StringBuilder sb = new StringBuilder();
-        Iterator<String> iter = paramNames.iterator();
 
         sb.append('<').append(rootTag).append(">");
-        while (iter.hasNext())
+        for (String key:paramNames)
         {
-            String key = iter.next();
             String value = this.getProperty(key);
 
             if (value!=null)
@@ -65,19 +69,17 @@ public abstract class WapRequestBase extends RequestBase
         throws UnsupportedEncodingException
     {
         URLBuilder ub = new URLBuilder();
-        Iterator<String> iter = paramNames.iterator();
 
         ub.appendPath(URL_ALIPAY_GATEWAY);
-        while (iter.hasNext())
+        for (String key:paramNames)
         {
-            String key = iter.next();
             String value = this.getProperty(key);
 
             if (value!=null)
             {
-                if (PROPKEY_REQ_DATA.equals(key))
-                    ub.appendParam(key,value);
-                else
+                //if (PROPKEY_REQ_DATA.equals(key))
+                    //ub.appendParam(key,value);
+                //else
                     ub.appendParamEncode(key, value, charset);
             }
         }
@@ -89,19 +91,17 @@ public abstract class WapRequestBase extends RequestBase
         throws UnsupportedEncodingException
     {
         URLBuilder ub = new URLBuilder();
-        Iterator<String> iter = paramNames.iterator();
 
         ub.appendPath(URL_ALIPAY_GATEWAY);
-        while (iter.hasNext())
+        for (String key:paramNames)
         {
-            String key = iter.next();
             String value = this.getProperty(key);
 
             if (value!=null)
             {
-                if (PROPKEY_REQ_DATA.equals(key))
-                    ub.appendParam(key,value);
-                else
+                //if (PROPKEY_REQ_DATA.equals(key))
+                    //ub.appendParam(key,value);
+                //else
                     ub.appendParamEncode(key, value, charset);
             }
         }
@@ -113,6 +113,33 @@ public abstract class WapRequestBase extends RequestBase
             ub.appendParamEncode(PROPKEY_SIGN, this.getProperty(PROPKEY_SIGN), charset);
 
         return(ub.toString());
+    }
+
+  // EXECUTE
+    @Override
+    /**
+     * currently throws no exception
+     */
+    public ResponseBase execute()
+        throws AlipayException
+    {
+        try
+        {
+            String params = Request.Get(this.toURL())
+                .execute()
+                .returnContent()
+                .asString();
+
+            Properties prop = parseHttpParam(params);
+            prop.putAll(parseXML(prop.getProperty(PROPKEY_RES_DATA)));
+
+            return(new ResponseBase(params, prop));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            throw(new AlipayException(ex));
+        }
     }
 
   // CONSTRUCT

@@ -103,6 +103,22 @@ public class AlipayFactory
         ));
     }
 
+    public WapAuthAndExecute newWapAuthAndExecute()
+    {
+        return(
+            new WapAuthAndExecute(
+                new Properties(this.conf)
+        ));
+    }
+
+    public WapAuthAndExecute newWapAuthAndExecute(Properties p)
+    {
+        return(
+            new WapAuthAndExecute(
+                buildConf(p, this.conf)
+        ));
+    }
+
   // MISC
     protected static Properties buildConf(Properties prop, Properties defaults)
     {
