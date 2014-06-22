@@ -4,10 +4,23 @@ import java.util.Properties;
 
 public class WapTradeCreateDirectResponse extends ResponseBase
 {
-    public WapTradeCreateDirectResponse(Properties prop)
+  // CONSTANTS
+    public static final String PROPKEY_REQUEST_TOKEN = "request_token";
+    public String getRequestToken()
     {
-        this.respProp = prop;
-
-        return;
+        return(this.respProp.getProperty(PROPKEY_REQUEST_TOKEN));
     }
+
+   // CONSTRUCT
+    public WapTradeCreateDirectResponse(String respString, Properties respProp)
+    {
+        super(respString, respProp);
+    }
+
+    public WapTradeCreateDirectResponse(ResponseBase resp)
+    {
+        this(resp.getString(), resp.getProperties());
+    }
+
+
 }

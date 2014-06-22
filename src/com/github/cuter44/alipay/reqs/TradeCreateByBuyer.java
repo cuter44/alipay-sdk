@@ -63,7 +63,7 @@ public class TradeCreateByBuyer extends WebRequestBase
 
   // SIGN
     @Override
-    public RequestBase sign()
+    public TradeCreateByBuyer sign()
         throws UnsupportedEncodingException, IllegalStateException
     {
         this.sign(KEYS_PARAM_NAME);

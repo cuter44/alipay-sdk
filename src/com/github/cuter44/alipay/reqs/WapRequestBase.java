@@ -3,6 +3,7 @@ package com.github.cuter44.alipay.reqs;
 import java.util.List;
 import java.util.Properties;
 import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 
 import com.github.cuter44.alipay.util.URLBuilder;
 import org.apache.http.client.fluent.*;
@@ -15,12 +16,14 @@ import static com.github.cuter44.alipay.util.XMLParser.parseXML;
 public abstract class WapRequestBase extends RequestBase
 {
     //public static final String PROPKEY_CHARSET      = "_input_charset";
-    public static final String PROPKEY_KEY          = "KEY";
-    public static final String PROPKEY_SIGN_TYPE    = "sec_id";
-    public static final String PROPKEY_SIGN         = "sign";
-    public static final String PROPKEY_REQ_DATA     = "req_data";
-    public static final String PROPKEY_RES_DATA     = "res_data";
-    public static final String URL_ALIPAY_GATEWAY   = "http://wappaygw.alipay.com/service/rest.htm";
+    public static final String PROPKEY_KEY              = "KEY";
+    public static final String PROPKEY_SIGN_TYPE        = "sec_id";
+    public static final String PROPKEY_SIGN             = "sign";
+    public static final String PROPKEY_REQ_DATA         = "req_data";
+    public static final String PROPKEY_RES_DATA         = "res_data";
+    public static final String PROPKEY_RES_ERROR        = "res_error";
+    public static final String PROPKEY_RES_ERROR_MSG    = "msg";
+    public static final String URL_ALIPAY_GATEWAY       = "http://wappaygw.alipay.com/service/rest.htm";
 
   // BUILD
     protected void buildReqData(List<String> paramNames, String rootTag)
@@ -133,11 +136,18 @@ public abstract class WapRequestBase extends RequestBase
             Properties prop = parseHttpParam(params);
             prop.putAll(parseXML(prop.getProperty(PROPKEY_RES_DATA)));
 
+            if (prop.getProperty(PROPKEY_RES_ERROR)!=null)
+                throw(
+                    new AlipayException(
+                        prop.getProperty(PROPKEY_RES_ERROR_MSG)
+                            .toUpperCase()
+                            .replace(' ','_')
+                ));
+
             return(new ResponseBase(params, prop));
         }
-        catch (Exception ex)
+        catch (IOException ex)
         {
-            ex.printStackTrace();
             throw(new AlipayException(ex));
         }
     }

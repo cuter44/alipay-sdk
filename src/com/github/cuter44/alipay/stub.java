@@ -97,6 +97,7 @@ public class stub
         //shellExecuteWindows(demoTradeCreateByBuyer());
 
         // TESTCASE 4
+        // not really executable on a PC, you'd better take down the URL and run on your phone...
         shellExecuteWindows(
             demoWapAuthAndExecute(
                 demoWapTradeCreateDirect().getProperties()

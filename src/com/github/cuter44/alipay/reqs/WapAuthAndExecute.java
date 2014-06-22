@@ -47,7 +47,7 @@ public class WapAuthAndExecute extends WapRequestBase
 
   // SIGN
     @Override
-    public RequestBase sign()
+    public WapAuthAndExecute sign()
         throws UnsupportedEncodingException, IllegalStateException
     {
         this.sign(KEYS_PARAM_NAME);

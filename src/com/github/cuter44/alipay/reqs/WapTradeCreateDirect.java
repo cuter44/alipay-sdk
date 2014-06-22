@@ -46,7 +46,7 @@ public class WapTradeCreateDirect extends WapRequestBase
 
   // BUILD
     @Override
-    public RequestBase build()
+    public WapTradeCreateDirect build()
     {
         this.buildReqData(TAGNAMES_REQ_DATA, TAGNAME_REQ_DATA_ROOT);
         return(this);
@@ -54,7 +54,7 @@ public class WapTradeCreateDirect extends WapRequestBase
 
   // SIGN
     @Override
-    public RequestBase sign()
+    public WapTradeCreateDirect sign()
         throws UnsupportedEncodingException, IllegalStateException
     {
         this.sign(KEYS_PARAM_NAME);
@@ -72,5 +72,14 @@ public class WapTradeCreateDirect extends WapRequestBase
     }
 
   // EXECUTE
+    @Override
+    public WapTradeCreateDirectResponse execute()
+        throws AlipayException
+    {
+        return(
+            new WapTradeCreateDirectResponse(
+                super.execute()
+        ));
+    }
     // use default
 }
