@@ -24,7 +24,7 @@ public class WapTradeCreateDirect extends WapRequestBase
         "v"
     );
     public static final List<String> TAGNAMES_REQ_DATA = Arrays.asList(
-        "call_back_uri",
+        "call_back_url",
         "merchant_url",
         "notify_url",
         "out_trade_no",
