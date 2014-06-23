@@ -2,6 +2,10 @@ package com.github.cuter44.alipay.resps;
 
 import java.util.Properties;
 
+/** General response passed by req.execute() or alipay callback/redirect gateways
+ * Actually reqs/gateways passed excatly response type, aka. sub-class of this.
+ * I'm recommending you to see the sub-class javadoc... to help you write elegant code.
+ */
 public class ResponseBase
 {
   // STRING

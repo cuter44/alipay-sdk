@@ -19,7 +19,7 @@ public class WapTradeCreateDirectResponse extends ResponseBase
 
     public WapTradeCreateDirectResponse(ResponseBase resp)
     {
-        this(resp.getString(), resp.getProperties());
+        this(resp.respString, resp.respProp);
     }
 
 

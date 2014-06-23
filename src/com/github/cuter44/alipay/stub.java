@@ -46,7 +46,8 @@ public class stub
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
                 .setProperty("total_fee",           "0.01")
                 .setProperty("subject",             "交易功能测试")
-                .setProperty("call_back_url",       "http://www.douban.com/people/51983043");
+                .setProperty("call_back_url",       "http://www.douban.com/people/51983043")
+                .setProperty("notify_url",          "http://weixin.uutime.cn/nyagalin/gateway");
             return(req.build().sign().execute());
         }
         catch (Exception ex)
