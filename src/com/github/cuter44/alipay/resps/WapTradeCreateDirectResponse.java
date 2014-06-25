@@ -6,20 +6,22 @@ public class WapTradeCreateDirectResponse extends ResponseBase
 {
   // CONSTANTS
     public static final String PROPKEY_REQUEST_TOKEN = "request_token";
-    public String getRequestToken()
+
+  // CONSTRUCT
+    public WapTradeCreateDirectResponse(ResponseBase r)
     {
-        return(this.respProp.getProperty(PROPKEY_REQUEST_TOKEN));
+        this(r.respString, r.respProp);
     }
 
-   // CONSTRUCT
     public WapTradeCreateDirectResponse(String respString, Properties respProp)
     {
         super(respString, respProp);
     }
 
-    public WapTradeCreateDirectResponse(ResponseBase resp)
+  // MISC
+    public String getRequestToken()
     {
-        this(resp.respString, resp.respProp);
+        return(this.respProp.getProperty(PROPKEY_REQUEST_TOKEN));
     }
 
 

@@ -59,6 +59,8 @@ public class TradeCreateByBuyer extends WebRequestBase
     {
         super(prop);
         this.setProperty("service", "trade_create_by_buyer");
+
+        return;
     }
 
   // SIGN

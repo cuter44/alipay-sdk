@@ -119,6 +119,22 @@ public class AlipayFactory
         ));
     }
 
+    public NotifyVerify newNotifyVerify()
+    {
+        return(
+            new NotifyVerify(
+                new Properties(this.conf)
+        ));
+    }
+
+    public NotifyVerify newNotifyVerify(Properties p)
+    {
+        return(
+            new NotifyVerify(
+                buildConf(p, this.conf)
+        ));
+    }
+
   // MISC
     protected static Properties buildConf(Properties prop, Properties defaults)
     {

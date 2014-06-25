@@ -29,10 +29,13 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
                 //@Override
                 //public boolean handle(NotifyBase n)
                 //{
-                    //System.out.println("handled.");
+
                     //System.out.println(n.getString());
                     //System.out.println(n.getProperties().toString());
 
+                    //System.out.println("verify notify... "+n.verify(new AlipayFactory()));
+
+                    //System.out.println("handled.");
                     //return(true);
                 //}
             //}
@@ -56,7 +59,7 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
         //OutputStream out = resp.getOutputStream();
 
         // Dequote if pend to write chars
-        //resp.setContentType("text/plain");
+        resp.setContentType("text/plain");
         PrintWriter out = resp.getWriter();
 
 
