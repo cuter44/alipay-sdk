@@ -73,20 +73,20 @@ public class AlipayFactory
         ));
     }
 
-    //public SendGoodsConfirmByPlatform newSendGoodsConfirmByUser()
-    //{
-        //return(
-            //new SendGoodsConfirmByPlatform(
-                //new Properties(this.conf)
-        //));
-    //}
-    //public SendGoodsConfirmByPlatform newSendGoodsConfirmByUser(Properties p)
-    //{
-        //return(
-            //new SendGoodsConfirmByPlatform(
-                //buildConf(p, this.conf)
-        //));
-    //}
+    public SendGoodsConfirmByPlatform newSendGoodsConfirmByPlatform()
+    {
+        return(
+            new SendGoodsConfirmByPlatform(
+                new Properties(this.conf)
+        ));
+    }
+    public SendGoodsConfirmByPlatform newSendGoodsConfirmByPlatform(Properties p)
+    {
+        return(
+            new SendGoodsConfirmByPlatform(
+                buildConf(p, this.conf)
+        ));
+    }
 
     public WapTradeCreateDirect newWapTradeCreateDirect()
     {
@@ -119,6 +119,22 @@ public class AlipayFactory
         ));
     }
 
+    public CreateDirectPayByUser newCreateDirectPayByUser()
+    {
+        return(
+            new CreateDirectPayByUser(
+                new Properties(this.conf)
+        ));
+    }
+
+    public CreateDirectPayByUser newCreateDirectPayByUser(Properties p)
+    {
+        return(
+            new CreateDirectPayByUser(
+                buildConf(p, this.conf)
+        ));
+    }
+
     public NotifyVerify newNotifyVerify()
     {
         return(
@@ -134,6 +150,7 @@ public class AlipayFactory
                 buildConf(p, this.conf)
         ));
     }
+
 
   // MISC
     protected static Properties buildConf(Properties prop, Properties defaults)

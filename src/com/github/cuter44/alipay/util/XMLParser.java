@@ -2,7 +2,7 @@ package com.github.cuter44.alipay.util;
 
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Properties;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -18,8 +18,8 @@ public class XMLParser
     private static class PropertyCollector extends DefaultHandler
     {
         private Properties prop = new Properties();
-        private ArrayList<String> keyStack = new ArrayList<String>();
-        private ArrayList<StringBuilder> valueStack = new ArrayList<StringBuilder>();
+        private LinkedList<String> keyStack = new LinkedList<String>();
+        private LinkedList<StringBuilder> valueStack = new LinkedList<StringBuilder>();
 
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes)
@@ -27,27 +27,26 @@ public class XMLParser
             this.keyStack.add(qName);
             this.valueStack.add(new StringBuilder());
 
-            for (int i=keyStack.size()-2; i>=0; i--)
-                valueStack.get(i)
-                    .append('<')
-                    .append(qName)
-                    .append('>');
-
             return;
         }
 
         @Override
         public void endElement(String uri, String localName, String qName)
         {
-            String key = this.keyStack.remove(keyStack.size()-1);
-            String value = this.valueStack.remove(valueStack.size()-1).toString();
+            String key = this.keyStack.removeLast();
+            StringBuilder value = this.valueStack.removeLast();
 
-            this.prop.setProperty(key, value);
+            this.prop.setProperty(key, value.toString());
 
-            for (int i=keyStack.size()-1; i>=0; i--)
-                valueStack.get(i)
+            if (valueStack.size()>0)
+                this.valueStack
+                    .getLast()
+                    .append('<')
+                    .append(key)
+                    .append('>')
+                    .append(value)
                     .append("</")
-                    .append(qName)
+                    .append(key)
                     .append('>');
 
             return;
@@ -56,9 +55,7 @@ public class XMLParser
         @Override
         public void characters(char[] ch, int start, int length)
         {
-            for (int i=keyStack.size()-1; i>=0; i--)
-                valueStack.get(i)
-                    .append(ch, start, length);
+            this.valueStack.getLast().append(ch, start, length);
 
             return;
         }

@@ -4,19 +4,19 @@ import java.util.Properties;
 
 import com.github.cuter44.alipay.constants.TradeStatus;
 
-public class TradeStatusSyncNotify extends NotifyBase
+public class SendGoodsConfirmByPlatformResponse extends ResponseBase
 {
     public static final String KEY_OUT_TRADE_NO = "out_trade_no";
     public static final String KEY_TRADE_STATUS = "trade_status";
 
-    public TradeStatusSyncNotify(NotifyBase n)
+    public SendGoodsConfirmByPlatformResponse(ResponseBase r)
     {
-        this(n.getString(), n.getProperties());
+        this(r.getString(), r.getProperties());
 
         return;
     }
 
-    public TradeStatusSyncNotify(String respString, Properties respProp)
+    public SendGoodsConfirmByPlatformResponse(String respString, Properties respProp)
     {
         super(respString, respProp);
 

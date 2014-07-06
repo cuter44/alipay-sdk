@@ -6,8 +6,6 @@ import java.util.Properties;
 import java.net.URISyntaxException;
 import java.io.UnsupportedEncodingException;
 
-import org.apache.http.client.fluent.*;
-
 import com.github.cuter44.alipay.*;
 import com.github.cuter44.alipay.resps.*;
 
