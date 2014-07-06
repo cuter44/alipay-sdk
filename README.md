@@ -1,12 +1,12 @@
 # 支付宝服务器端SDK for Java / alipay seller-side sdk for Java  
 
-## 免责声明/Disclaimer
+## Disclaimer/免责声明
 
 Though I make effort to not stealing your money or any secret about your alipay account, or leak to third-party. But I am still not responsable for any direct or indriect lost for your using of these (or part of) source code. It is your responsibility to check any risk before apply them.  
 
 作者不对使用代码所带来的直接或间接损失负责. 由于源代码是公开的, 检查和确保代码的安全性是属于使用者的职责. 请时刻清醒地意识这一点.  
 
-## 教程/Tutorial
+## Tutorial/教程
 
 Frist of all, ensure you have `jdk` and `apache-ant`.  
 Development environment applied `Oracle-jdk 1.7` and `apache-ant-1.9.2`, all goes well.
@@ -32,7 +32,7 @@ demos are provided in `src/com/github/cuter44/stub.java`.
 2. 配置: 将那个jar加到你的classpath, 然后还需要一个配置文件, 怎么写参见 `doc/alipay.properties.sample`  
 3. 调用: 参见 `src/com/github/cuter44/stub.java`.
 
-## 样例/Sample
+## Sample/样例
 
 ### Initiative request/主动请求
 
