@@ -8,10 +8,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 
 import com.github.cuter44.util.crypto.*;
+import com.github.cuter44.util.string.URLBuilder;
 import org.apache.http.client.fluent.*;
 
 import com.github.cuter44.alipay.AlipayException;
-import com.github.cuter44.alipay.util.URLBuilder;
 import com.github.cuter44.alipay.resps.ResponseBase;
 
 /**
@@ -109,12 +109,7 @@ public abstract class RequestBase
         URLBuilder ub = new URLBuilder();
 
         for (String key:paramNames)
-        {
-            String value = this.getProperty(key);
-
-            if (value!=null)
-                ub.appendParam(key, value);
-        }
+            ub.appendParam(key, this.getProperty(key));
 
         return(ub.toString());
     }

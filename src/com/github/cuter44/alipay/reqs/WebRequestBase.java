@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Properties;
 import java.io.UnsupportedEncodingException;
 
-import com.github.cuter44.alipay.util.URLBuilder;
+import com.github.cuter44.util.string.URLBuilder;
 
 public abstract class WebRequestBase extends RequestBase
 {
@@ -13,6 +13,12 @@ public abstract class WebRequestBase extends RequestBase
     public static final String PROPKEY_SIGN_TYPE    = "sign_type";
     public static final String PROPKEY_SIGN         = "sign";
     public static final String URL_ALIPAY_GATEWAY   = "https://mapi.alipay.com/gateway.do";
+
+  // CONSTRUCT
+    public WebRequestBase(Properties aConf)
+    {
+        super(aConf);
+    }
 
   // BUILD
     @Override
@@ -49,12 +55,7 @@ public abstract class WebRequestBase extends RequestBase
 
         ub.appendPath(URL_ALIPAY_GATEWAY);
         for (String key:paramNames)
-        {
-            String value = this.getProperty(key);
-
-            if (value!=null)
-                ub.appendParamEncode(key, value, charset);
-        }
+            ub.appendParamEncode(key, this.getProperty(key), charset);
 
         return(ub.toString());
     }
@@ -66,12 +67,7 @@ public abstract class WebRequestBase extends RequestBase
 
         ub.appendPath(URL_ALIPAY_GATEWAY);
         for (String key:paramNames)
-        {
-            String value = this.getProperty(key);
-
-            if (value!=null)
-                ub.appendParamEncode(key, value, charset);
-        }
+            ub.appendParamEncode(key, this.getProperty(key), charset);
 
         if (!paramNames.contains(PROPKEY_SIGN_TYPE))
             ub.appendParamEncode(PROPKEY_SIGN_TYPE, this.getProperty(PROPKEY_SIGN_TYPE), charset);
@@ -82,9 +78,4 @@ public abstract class WebRequestBase extends RequestBase
         return(ub.toString());
     }
 
-  // CONSTRUCT
-    public WebRequestBase(Properties aConf)
-    {
-        super(aConf);
-    }
 }

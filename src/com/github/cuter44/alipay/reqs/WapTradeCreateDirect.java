@@ -79,5 +79,4 @@ public class WapTradeCreateDirect extends WapRequestBase
                 super.execute()
         ));
     }
-    // use default
 }

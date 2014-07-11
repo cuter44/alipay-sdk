@@ -5,7 +5,7 @@ import java.util.Properties;
 import java.io.UnsupportedEncodingException;
 import java.io.IOException;
 
-import com.github.cuter44.alipay.util.URLBuilder;
+import com.github.cuter44.util.string.URLBuilder;
 import org.apache.http.client.fluent.*;
 
 import com.github.cuter44.alipay.AlipayException;
@@ -24,6 +24,12 @@ public abstract class WapRequestBase extends RequestBase
     public static final String PROPKEY_RES_ERROR        = "res_error";
     public static final String PROPKEY_RES_ERROR_MSG    = "msg";
     public static final String URL_ALIPAY_GATEWAY       = "http://wappaygw.alipay.com/service/rest.htm";
+
+  // CONSTRUCT
+    public WapRequestBase(Properties aConf)
+    {
+        super(aConf);
+    }
 
   // BUILD
     protected void buildReqData(List<String> paramNames, String rootTag)
@@ -75,17 +81,7 @@ public abstract class WapRequestBase extends RequestBase
 
         ub.appendPath(URL_ALIPAY_GATEWAY);
         for (String key:paramNames)
-        {
-            String value = this.getProperty(key);
-
-            if (value!=null)
-            {
-                //if (PROPKEY_REQ_DATA.equals(key))
-                    //ub.appendParam(key,value);
-                //else
-                    ub.appendParamEncode(key, value, charset);
-            }
-        }
+            ub.appendParamEncode(key, this.getProperty(key), charset);
 
         return(ub.toString());
     }
@@ -97,17 +93,7 @@ public abstract class WapRequestBase extends RequestBase
 
         ub.appendPath(URL_ALIPAY_GATEWAY);
         for (String key:paramNames)
-        {
-            String value = this.getProperty(key);
-
-            if (value!=null)
-            {
-                //if (PROPKEY_REQ_DATA.equals(key))
-                    //ub.appendParam(key,value);
-                //else
-                    ub.appendParamEncode(key, value, charset);
-            }
-        }
+            ub.appendParamEncode(key, this.getProperty(key), charset);
 
         if (!paramNames.contains(PROPKEY_SIGN_TYPE))
             ub.appendParamEncode(PROPKEY_SIGN_TYPE, this.getProperty(PROPKEY_SIGN_TYPE), charset);
@@ -152,9 +138,4 @@ public abstract class WapRequestBase extends RequestBase
         }
     }
 
-  // CONSTRUCT
-    public WapRequestBase(Properties aConf)
-    {
-        super(aConf);
-    }
 }

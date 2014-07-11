@@ -1,9 +1,9 @@
-package com.github.cuter44.alipay.util;
+package com.github.cuter44.util.string;
 
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 
-/** Auxiliary tool to build URL for damn Alipay API.
+/**
  * Works like StringBuilder
  */
 public class URLBuilder
@@ -40,34 +40,38 @@ public class URLBuilder
 
     public URLBuilder appendParam(String key, String value)
     {
-        if (key!=null)
+        if (key!=null && value!=null)
         {
             this.appendParamPrefix();
             this.builder.append(key).append('=');
-            if (value!=null)
-                this.builder.append(value);
+            this.builder.append(value);
         }
 
         return(this);
     }
 
     public URLBuilder appendParamEncode(String key, String value)
-        throws UnsupportedEncodingException
     {
-        return(
-            this.appendParamEncode(key, value, "utf-8")
-        );
+        try
+        {
+            this.appendParamEncode(key, value, "utf-8");
+        }
+        catch (UnsupportedEncodingException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return(this);
     }
 
     public URLBuilder appendParamEncode(String key, String value, String charset)
         throws UnsupportedEncodingException
     {
-        if (key!=null)
+        if (key!=null && value!=null)
         {
             this.appendParamPrefix();
             this.builder.append(key).append('=');
-            if (value!=null)
-                this.builder.append(URLEncoder.encode(value, charset));
+            this.builder.append(URLEncoder.encode(value, charset));
         }
 
         return(this);

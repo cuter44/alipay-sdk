@@ -7,3 +7,4 @@
 即时到账批量退款有密接口-refund_fastpay_by_platform_pwd(20130621)
 确认发货接口-send_goods_confirm_by_platform(20130530)
 手机网页即时到账接口-手机网页即时到账接口(20131121)
+纯网关接口-create_direct_pay_by_user(20140710)

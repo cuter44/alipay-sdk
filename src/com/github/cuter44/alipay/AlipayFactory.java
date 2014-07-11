@@ -11,6 +11,7 @@ import com.github.cuter44.alipay.reqs.*;
  */
 public class AlipayFactory
 {
+  // CONSTANT
     private static final String RESOURCE_ALIPAY_PROPERTIES = "/alipay.properties";
 
   // CONFIG
@@ -55,6 +56,17 @@ public class AlipayFactory
 
             throw(mrex);
         }
+    }
+
+  // SINGLETON
+    private static class Singleton
+    {
+        public static final AlipayFactory instance = new AlipayFactory();
+    }
+
+    public static AlipayFactory getInstance()
+    {
+        return(Singleton.instance);
     }
 
   // FACTORY
@@ -164,10 +176,5 @@ public class AlipayFactory
         }
 
         return(ret);
-    }
-
-    public static void main(String[] args)
-    {
-        System.out.println("Hello World!");
     }
 }
