@@ -16,7 +16,7 @@ public class stub
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = new AlipayFactory();
+            AlipayFactory factory = AlipayFactory.getInstance();
 
             RequestBase req = factory.newTradeCreateByBuyer()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
@@ -42,7 +42,7 @@ public class stub
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = new AlipayFactory();
+            AlipayFactory factory = AlipayFactory.getInstance();
 
             RequestBase req = factory.newWapTradeCreateDirect()
                 .setProperty("req_id",              "test"+rand.nextLong())
@@ -65,7 +65,7 @@ public class stub
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = new AlipayFactory();
+            AlipayFactory factory = AlipayFactory.getInstance();
 
             RequestBase req = factory.newWapAuthAndExecute(prop);
             return(req.build().sign().toURL());
@@ -82,7 +82,7 @@ public class stub
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = new AlipayFactory();
+            AlipayFactory factory = AlipayFactory.getInstance();
 
             RequestBase req = factory.newCreateDirectPayByUser()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
@@ -99,12 +99,35 @@ public class stub
         }
     }
 
+    public static String demoCreateDirectPayByUserBank()
+    {
+        Random rand = new Random();
+
+        try{
+            AlipayFactory factory = AlipayFactory.getInstance();
+
+            RequestBase req = factory.newCreateDirectPayByUserBank()
+                .setProperty("out_trade_no",        "test"+rand.nextLong())
+                .setProperty("subject",             "银行网关支付测试")
+                .setProperty("payment_type",        "1")
+                .setProperty("total_fee",           "0.01")
+                .setProperty("defaultbank",         "ICBC-DEBIT");
+
+            return(req.build().sign().toURL());
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return(null);
+        }
+    }
+
     public static void demoTradeCreateByUserAndSendGoods()
     {
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = new AlipayFactory();
+            AlipayFactory factory = AlipayFactory.getInstance();
 
             RequestBase req1 = factory.newTradeCreateByBuyer()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
@@ -172,6 +195,10 @@ public class stub
         //shellExecuteWindows(demoCreateDirectPayByUser());
 
         // TESTCASE 6
-        demoTradeCreateByUserAndSendGoods();
+        //demoTradeCreateByUserAndSendGoods();
+
+        // TESTCASE 7
+        shellExecuteWindows(demoCreateDirectPayByUserBank());
+
     }
 }

@@ -98,7 +98,14 @@ public enum AlipayErrorCode
     EBANK_CERDIT_GW_RULE_NOT_OPEN               (-89,"信用卡未签约 （签约到期） 或者接口参数未指定开通信用卡支付。"),
     ILLEGAL_DIGEST_TYPE                         (-90,"摘要类型不正确"),
     REGEXP_MATCH_FAIL                           (-91,"正则表达式匹配失败"),
-    ILLEGAL_CHARSET                             (-92,"字符集不合法");
+    ILLEGAL_CHARSET                             (-92,"字符集不合法"),
+
+    SYSTEM_ERROR                                (-32768, "支付宝系统错误"),
+    SESSION_TIMEOUT                             (-32769, "session 超时"),
+    ILLEGAL_TARGET_SERVICE                      (-32770, "错误的 target_service"),
+    ILLEGAL_ACCESS_SWITCH_SYSTEM                (-32771, "partner 不允许访问该类型的系统"),
+    ILLEGAL_SWITCH_SYSTEM                       (-32772, "切换系统异常"),
+    EXTERFACE_IS_CLOSED                         (-32773, "接口已关闭");
 
   // FIELDS
     private int code;

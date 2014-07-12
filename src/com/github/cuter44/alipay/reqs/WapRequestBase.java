@@ -15,14 +15,14 @@ import static com.github.cuter44.alipay.util.XMLParser.parseXML;
 
 public abstract class WapRequestBase extends RequestBase
 {
-    //public static final String PROPKEY_CHARSET      = "_input_charset";
-    public static final String PROPKEY_KEY              = "KEY";
-    public static final String PROPKEY_SIGN_TYPE        = "sec_id";
-    public static final String PROPKEY_SIGN             = "sign";
-    public static final String PROPKEY_REQ_DATA         = "req_data";
-    public static final String PROPKEY_RES_DATA         = "res_data";
-    public static final String PROPKEY_RES_ERROR        = "res_error";
-    public static final String PROPKEY_RES_ERROR_MSG    = "msg";
+    //public static final String KEY_CHARSET      = "_input_charset";
+    public static final String KEY_KEY              = "KEY";
+    public static final String KEY_SIGN_TYPE        = "sec_id";
+    public static final String KEY_SIGN             = "sign";
+    public static final String KEY_REQ_DATA         = "req_data";
+    public static final String KEY_RES_DATA         = "res_data";
+    public static final String KEY_RES_ERROR        = "res_error";
+    public static final String KEY_RES_ERROR_MSG    = "msg";
     public static final String URL_ALIPAY_GATEWAY       = "http://wappaygw.alipay.com/service/rest.htm";
 
   // CONSTRUCT
@@ -49,7 +49,7 @@ public abstract class WapRequestBase extends RequestBase
         sb.append("</").append(rootTag).append(">");
 
         //String reqData = sb.toString();
-        this.setProperty(PROPKEY_REQ_DATA, sb.toString());
+        this.setProperty(KEY_REQ_DATA, sb.toString());
         return;
     }
 
@@ -60,13 +60,13 @@ public abstract class WapRequestBase extends RequestBase
     public RequestBase sign(List<String> paramNames)
         throws UnsupportedEncodingException
     {
-        String signType = this.getProperty(PROPKEY_SIGN_TYPE);
-        //String charset = this.getProperty(PROPKEY_CHARSET);
-        String key = this.getProperty(PROPKEY_KEY);
+        String signType = this.getProperty(KEY_SIGN_TYPE);
+        //String charset = this.getProperty(KEY_CHARSET);
+        String key = this.getProperty(KEY_KEY);
 
         String sign = this.sign(paramNames, signType, key, "utf-8");
 
-        this.setProperty(PROPKEY_SIGN, sign);
+        this.setProperty(KEY_SIGN, sign);
 
         return(this);
     }
@@ -95,11 +95,11 @@ public abstract class WapRequestBase extends RequestBase
         for (String key:paramNames)
             ub.appendParamEncode(key, this.getProperty(key), charset);
 
-        if (!paramNames.contains(PROPKEY_SIGN_TYPE))
-            ub.appendParamEncode(PROPKEY_SIGN_TYPE, this.getProperty(PROPKEY_SIGN_TYPE), charset);
+        if (!paramNames.contains(KEY_SIGN_TYPE))
+            ub.appendParamEncode(KEY_SIGN_TYPE, this.getProperty(KEY_SIGN_TYPE), charset);
 
-        if (!paramNames.contains(PROPKEY_SIGN))
-            ub.appendParamEncode(PROPKEY_SIGN, this.getProperty(PROPKEY_SIGN), charset);
+        if (!paramNames.contains(KEY_SIGN))
+            ub.appendParamEncode(KEY_SIGN, this.getProperty(KEY_SIGN), charset);
 
         return(ub.toString());
     }
@@ -120,12 +120,12 @@ public abstract class WapRequestBase extends RequestBase
                 .asString();
 
             Properties prop = parseHttpParam(params);
-            prop.putAll(parseXML(prop.getProperty(PROPKEY_RES_DATA)));
+            prop.putAll(parseXML(prop.getProperty(KEY_RES_DATA)));
 
-            if (prop.getProperty(PROPKEY_RES_ERROR)!=null)
+            if (prop.getProperty(KEY_RES_ERROR)!=null)
                 throw(
                     new AlipayException(
-                        prop.getProperty(PROPKEY_RES_ERROR_MSG)
+                        prop.getProperty(KEY_RES_ERROR_MSG)
                             .toUpperCase()
                             .replace(' ','_')
                 ));

@@ -14,7 +14,7 @@ import static com.github.cuter44.alipay.util.XMLParser.parseXML;
 
 public class AlipayNotifyGatewayServlet extends HttpServlet
 {
-    protected static final String PROPKEY_NOTIFY_DATA = "notify_data";
+    protected static final String KEY_NOTIFY_DATA = "notify_data";
     //private ServletContext context = this.getServletContext();
 
     protected AlipayNotifyPublisher gateway = new AlipayNotifyPublisher();
@@ -72,8 +72,8 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
             String key = keys.nextElement();
             queryProp.setProperty(key, req.getParameter(key));
         }
-        if (queryProp.containsKey(PROPKEY_NOTIFY_DATA))
-            queryProp.putAll(parseXML(queryProp.getProperty(PROPKEY_NOTIFY_DATA)));
+        if (queryProp.containsKey(KEY_NOTIFY_DATA))
+            queryProp.putAll(parseXML(queryProp.getProperty(KEY_NOTIFY_DATA)));
 
         // DUMP
         //System.out.println("catched");

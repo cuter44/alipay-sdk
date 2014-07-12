@@ -8,10 +8,10 @@ import com.github.cuter44.util.string.URLBuilder;
 
 public abstract class WebRequestBase extends RequestBase
 {
-    public static final String PROPKEY_CHARSET      = "_input_charset";
-    public static final String PROPKEY_KEY          = "KEY";
-    public static final String PROPKEY_SIGN_TYPE    = "sign_type";
-    public static final String PROPKEY_SIGN         = "sign";
+    public static final String KEY_CHARSET      = "_input_charset";
+    public static final String KEY_KEY          = "KEY";
+    public static final String KEY_SIGN_TYPE    = "sign_type";
+    public static final String KEY_SIGN         = "sign";
     public static final String URL_ALIPAY_GATEWAY   = "https://mapi.alipay.com/gateway.do";
 
   // CONSTRUCT
@@ -34,13 +34,13 @@ public abstract class WebRequestBase extends RequestBase
     public RequestBase sign(List<String> paramNames)
         throws UnsupportedEncodingException
     {
-        String signType = this.getProperty(PROPKEY_SIGN_TYPE);
-        String charset = this.getProperty(PROPKEY_CHARSET);
-        String key = this.getProperty(PROPKEY_KEY);
+        String signType = this.getProperty(KEY_SIGN_TYPE);
+        String charset = this.getProperty(KEY_CHARSET);
+        String key = this.getProperty(KEY_KEY);
 
         String sign = this.sign(paramNames, signType, key, charset);
 
-        this.setProperty(PROPKEY_SIGN, sign);
+        this.setProperty(KEY_SIGN, sign);
 
         return(this);
     }
@@ -69,11 +69,11 @@ public abstract class WebRequestBase extends RequestBase
         for (String key:paramNames)
             ub.appendParamEncode(key, this.getProperty(key), charset);
 
-        if (!paramNames.contains(PROPKEY_SIGN_TYPE))
-            ub.appendParamEncode(PROPKEY_SIGN_TYPE, this.getProperty(PROPKEY_SIGN_TYPE), charset);
+        if (!paramNames.contains(KEY_SIGN_TYPE))
+            ub.appendParamEncode(KEY_SIGN_TYPE, this.getProperty(KEY_SIGN_TYPE), charset);
 
-        if (!paramNames.contains(PROPKEY_SIGN))
-            ub.appendParamEncode(PROPKEY_SIGN, this.getProperty(PROPKEY_SIGN), charset);
+        if (!paramNames.contains(KEY_SIGN))
+            ub.appendParamEncode(KEY_SIGN, this.getProperty(KEY_SIGN), charset);
 
         return(ub.toString());
     }

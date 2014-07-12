@@ -21,7 +21,7 @@ import com.github.cuter44.alipay.resps.ResponseBase;
 public abstract class RequestBase
 {
   // CONSTANT
-    public static final String PROPKEY_KEY = "KEY";
+    public static final String KEY_KEY = "KEY";
 
   // CONFIG
     protected Properties conf;

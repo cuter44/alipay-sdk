@@ -7,7 +7,7 @@ public class AlipayNotifyFactory
   // CONSTANTS
     protected static final String TYPE_TRADE_STATUS_SYNC = "trade_status_sync";
 
-    protected static final String PROPKEY_NOTIFY_TYPE = "notify_type";
+    protected static final String KEY_NOTIFY_TYPE = "notify_type";
 
   // FACTORY
     /** wrap notify
@@ -15,7 +15,7 @@ public class AlipayNotifyFactory
      */
     public static NotifyBase newNotifyInstance(Properties prop)
     {
-        String notifyType = prop.getProperty(PROPKEY_NOTIFY_TYPE);
+        String notifyType = prop.getProperty(KEY_NOTIFY_TYPE);
 
         //if ("alipay.wap.trade.create.direct".equals(notifyType))
             //return(new WapTradeCreateDirectNotify(null, prop));

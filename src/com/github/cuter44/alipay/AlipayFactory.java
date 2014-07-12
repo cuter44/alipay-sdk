@@ -147,6 +147,22 @@ public class AlipayFactory
         ));
     }
 
+    public CreateDirectPayByUserBank newCreateDirectPayByUserBank()
+    {
+        return(
+            new CreateDirectPayByUserBank(
+                new Properties(this.conf)
+        ));
+    }
+
+    public CreateDirectPayByUserBank newCreateDirectPayByUserBank(Properties p)
+    {
+        return(
+            new CreateDirectPayByUserBank(
+                buildConf(p, this.conf)
+        ));
+    }
+
     public NotifyVerify newNotifyVerify()
     {
         return(

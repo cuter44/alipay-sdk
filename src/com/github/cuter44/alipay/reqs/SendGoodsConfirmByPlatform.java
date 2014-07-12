@@ -14,7 +14,7 @@ import static com.github.cuter44.alipay.util.XMLParser.parseXML;
 
 public class SendGoodsConfirmByPlatform extends WebRequestBase
 {
-    public static final String PROPKEY_ERROR = "error";
+    public static final String KEY_ERROR = "error";
 
     public static final List<String> KEYS_PARAM_NAME = Arrays.asList(
         "_input_charset",
@@ -51,7 +51,7 @@ public class SendGoodsConfirmByPlatform extends WebRequestBase
     public String toURL()
         throws UnsupportedEncodingException
     {
-        String charset = this.getProperty(PROPKEY_CHARSET);
+        String charset = this.getProperty(KEY_CHARSET);
 
         return(
             this.toSignedURL(KEYS_PARAM_NAME, charset)
@@ -73,10 +73,10 @@ public class SendGoodsConfirmByPlatform extends WebRequestBase
 
             prop.putAll(parseXML(content));
 
-            if (prop.getProperty(PROPKEY_ERROR)!=null)
+            if (prop.getProperty(KEY_ERROR)!=null)
                 throw(
                     new AlipayException(
-                        prop.getProperty(PROPKEY_ERROR)
+                        prop.getProperty(KEY_ERROR)
                             .toUpperCase()
                             .replace(' ','_')
                 ));

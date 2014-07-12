@@ -5,7 +5,7 @@ import java.util.Properties;
 public class WapAuthAndExecuteResponse extends ResponseBase
 {
   // CONSTANTS
-    public static final String PROPKEY_RESULT = "result";
+    public static final String KEY_RESULT = "result";
 
   // CONSTRUCT
     public WapAuthAndExecuteResponse(ResponseBase resp)
@@ -23,7 +23,7 @@ public class WapAuthAndExecuteResponse extends ResponseBase
     {
         return(
             "success".equals(
-                this.respProp.getProperty(PROPKEY_RESULT)
+                this.respProp.getProperty(KEY_RESULT)
         ));
     }
 }

@@ -7,10 +7,14 @@ import java.io.UnsupportedEncodingException;
 
 import com.github.cuter44.alipay.*;
 import com.github.cuter44.alipay.resps.*;
+import com.github.cuter44.alipay.constants.BankType;
 
-public class CreateDirectPayByUser extends WebRequestBase
+public class CreateDirectPayByUserBank extends CreateDirectPayByUser
 {
   // KEYS
+    public static final String KEY_DEFAULTBANK = "defaultbank";
+    protected static final String KEY_PAYMETHOD = "paymethod";
+    protected static final String VALUE_BANKPAY = "bankPay";
     public static final List<String> KEYS_PARAM_NAME = Arrays.asList(
         "_input_charset",
         "anti_phishing_key",
@@ -19,6 +23,7 @@ public class CreateDirectPayByUser extends WebRequestBase
         "buyer_email",
         "buyer_id",
         "default_login",
+        "defaultbank",
         "eanable_paymethod",
         "err_notify_uri",
         "extend_param",
@@ -51,12 +56,19 @@ public class CreateDirectPayByUser extends WebRequestBase
     );
 
   // CONSTRUCT
-    public CreateDirectPayByUser(Properties prop)
+    public CreateDirectPayByUserBank(Properties prop)
     {
         super(prop);
-        this.setProperty("service", "create_direct_pay_by_user");
+        this.setProperty(KEY_PAYMETHOD, VALUE_BANKPAY);
 
         return;
+    }
+
+    public CreateDirectPayByUser setDefaultbank(BankType bank)
+    {
+        this.setProperty("KEY_DEFAULTBANK", bank.toString().replace('_', '-'));
+
+        return(this);
     }
 
   // SIGN

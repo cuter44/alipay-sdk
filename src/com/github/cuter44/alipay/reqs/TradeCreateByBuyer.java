@@ -77,7 +77,7 @@ public class TradeCreateByBuyer extends WebRequestBase
     public String toURL()
         throws UnsupportedEncodingException
     {
-        String charset = this.conf.getProperty(PROPKEY_CHARSET);
+        String charset = this.conf.getProperty(KEY_CHARSET);
 
         return(
             this.toSignedURL(KEYS_PARAM_NAME, charset)

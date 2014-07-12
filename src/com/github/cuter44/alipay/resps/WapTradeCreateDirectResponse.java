@@ -5,7 +5,7 @@ import java.util.Properties;
 public class WapTradeCreateDirectResponse extends ResponseBase
 {
   // CONSTANTS
-    public static final String PROPKEY_REQUEST_TOKEN = "request_token";
+    public static final String KEY_REQUEST_TOKEN = "request_token";
 
   // CONSTRUCT
     public WapTradeCreateDirectResponse(ResponseBase r)
@@ -21,7 +21,7 @@ public class WapTradeCreateDirectResponse extends ResponseBase
   // MISC
     public String getRequestToken()
     {
-        return(this.respProp.getProperty(PROPKEY_REQUEST_TOKEN));
+        return(this.respProp.getProperty(KEY_REQUEST_TOKEN));
     }
 
 

@@ -8,7 +8,7 @@ import com.github.cuter44.alipay.reqs.NotifyVerify;
 public class NotifyBase extends ResponseBase
 {
   // CONSTANTS
-    protected static final String PROPKEY_NOTIFY_ID = "notify_id";
+    protected static final String KEY_NOTIFY_ID = "notify_id";
 
   // CONSTRUCT
     public NotifyBase(ResponseBase resp)
@@ -42,7 +42,7 @@ public class NotifyBase extends ResponseBase
     public String getNotifyId()
     {
         return(
-            this.respProp.getProperty(PROPKEY_NOTIFY_ID)
+            this.respProp.getProperty(KEY_NOTIFY_ID)
         );
     }
 
