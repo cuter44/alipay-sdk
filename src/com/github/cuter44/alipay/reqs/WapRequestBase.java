@@ -5,7 +5,7 @@ import java.util.Properties;
 import java.io.UnsupportedEncodingException;
 import java.io.IOException;
 
-import com.github.cuter44.util.string.URLBuilder;
+import com.github.cuter44.util.text.URLBuilder;
 import org.apache.http.client.fluent.*;
 
 import com.github.cuter44.alipay.AlipayException;

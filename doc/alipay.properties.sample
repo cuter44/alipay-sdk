@@ -12,6 +12,7 @@ partner=2088411570944601
 seller_id=2088411570944601
 seller_account_name=name@host.com
 
+# must be utf-8, for compatible with front-end.
 _input_charset=utf-8
 
 #notify_url=

@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 
 import com.github.cuter44.util.crypto.*;
-import com.github.cuter44.util.string.URLBuilder;
+import com.github.cuter44.util.text.URLBuilder;
 import org.apache.http.client.fluent.*;
 
 import com.github.cuter44.alipay.AlipayException;

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Properties;
 import java.io.UnsupportedEncodingException;
 
-import com.github.cuter44.util.string.URLBuilder;
+import com.github.cuter44.util.text.URLBuilder;
 
 public abstract class WebRequestBase extends RequestBase
 {
