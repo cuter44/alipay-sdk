@@ -88,7 +88,8 @@ public class stub
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
                 .setProperty("subject",             "直接到帐支付测试")
                 .setProperty("payment_type",        "1")
-                .setProperty("total_fee",           "0.01");
+                .setProperty("total_fee",           "0.01")
+                .setProperty("notify_url",          "http://weixin.uutime.cn/nyagalin/gateway");
 
             return(req.build().sign().toURL());
         }
@@ -192,13 +193,15 @@ public class stub
         //));
 
         // TESTCASE 5
-        //shellExecuteWindows(demoCreateDirectPayByUser());
+        shellExecuteWindows(
+            demoCreateDirectPayByUser()
+        );
 
         // TESTCASE 6
         //demoTradeCreateByUserAndSendGoods();
 
         // TESTCASE 7
-        shellExecuteWindows(demoCreateDirectPayByUserBank());
+        //shellExecuteWindows(demoCreateDirectPayByUserBank());
 
     }
 }

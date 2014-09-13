@@ -3,6 +3,7 @@
 # Therefore don't keep asking me "why it returns ILLEGAL_FEE" or sth alike.
 
 标准双接口-trade_create_by_buyer(20140122)
+批量付款到支付宝账户有密接口-batch_trans_notify(20140617)
 即时到账交易接口-create_direct_pay_by_user(20140617)
 即时到账批量退款有密接口-refund_fastpay_by_platform_pwd(20130621)
 确认发货接口-send_goods_confirm_by_platform(20130530)

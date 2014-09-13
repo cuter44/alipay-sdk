@@ -21,50 +21,53 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
 
     // FOR TEST ONLY
     // QUOTE ME ON PRODUCE ENVIRONMENT
-    //@Override
-    //public void init()
-    //{
-        //this.gateway.addListener(
-            //new AlipayNotifyListener(){
-                //@Override
-                //public boolean handle(NotifyBase n)
-                //{
+    @Override
+    public void init(ServletConfig config)
+    {
+        if (Boolean.valueOf(config.getInitParameter("com.github.cuter44.alipay.notifygateway.dump")))
+        {
+            this.gateway.addListener(
+                new AlipayNotifyListener(){
+                    @Override
+                    public boolean handle(NotifyBase n)
+                    {
+                        ServletContext ctx = AlipayNotifyGatewayServlet.this.getServletContext();
 
-                    //System.out.println(n.getString());
-                    //System.out.println(n.getProperties().toString());
+                        ctx.log(n.getString());
+                        ctx.log(n.getProperties().toString());
 
-                    //System.out.println("verify notify... "+n.verify(new AlipayFactory()));
+                        ctx.log("verify notify... "+n.verify(new AlipayFactory()));
 
-                    //System.out.println("handled.");
-                    //return(true);
-                //}
-            //}
-        //);
-    //}
+                        return(false);
+                    }
+                }
+            );
+        }
+
+        if (Boolean.valueOf(config.getInitParameter("com.github.cuter44.alipay.notifygateway.intercept")))
+        {
+            this.gateway.addListener(
+                new AlipayNotifyListener(){
+                    @Override
+                    public boolean handle(NotifyBase n)
+                    {
+                        return(true);
+                    }
+                }
+            );
+        }
+    }
 
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp)
         throws IOException, ServletException
     {
-        // Encoding Configuration
-        // encode of req effects post method only
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
 
-        // Dequote if pend to use session
-        //HttpSession session = req.getSession();
-
-	    // Dequote if pend to write binary
-        //resp.setContentType("???MIME");
-        //OutputStream out = resp.getOutputStream();
-
-        // Dequote if pend to write chars
         resp.setContentType("text/plain");
         PrintWriter out = resp.getWriter();
 
-
-        //String queryString = req.getQueryString();
-        //Properties queryProp = parseHttpParam(queryString);
         Properties queryProp = new Properties();
         Enumeration<String> keys = req.getParameterNames();
         while (keys.hasMoreElements())
@@ -74,11 +77,6 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
         }
         if (queryProp.containsKey(KEY_NOTIFY_DATA))
             queryProp.putAll(parseXML(queryProp.getProperty(KEY_NOTIFY_DATA)));
-
-        // DUMP
-        //System.out.println("catched");
-        ////System.out.println(queryString);
-        //System.out.println(queryProp.toString());
 
         NotifyBase n = new NotifyBase(null, queryProp);
 

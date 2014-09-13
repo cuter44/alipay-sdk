@@ -16,7 +16,10 @@ public enum TradeStatus
 
     COD_WAIT_SYS_PAY_SELLER     (6, "等待到帐"),
 
-    TRADE_FINISH                (8, "交易成功"),
+    TRADE_PENDING               (7, "卖家帐号无法收款"),
+
+    TRADE_SUCCESS               (8, "交易成功"),
+    TRADE_FINISH                (10, "交易结束"),
 
     TRADE_CLOSED                (-1,"交易取消");
 

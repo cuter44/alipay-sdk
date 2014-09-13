@@ -46,5 +46,12 @@ public class NotifyBase extends ResponseBase
         );
     }
 
+    public String getParam(String key)
+    {
+        return(
+            this.respProp.getProperty(key)
+        );
+    }
+
 
 }
