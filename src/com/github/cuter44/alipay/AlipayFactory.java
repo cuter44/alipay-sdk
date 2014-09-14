@@ -179,6 +179,44 @@ public class AlipayFactory
         ));
     }
 
+    /** @deprecated not supported yet
+     */
+    @Deprecated
+    public BatchTransNotify newBatchTransNotify()
+    {
+        return(
+            new BatchTransNotify(
+                new Properties(this.conf)
+        ));
+    }
+
+    /** @deprecated not supported yet
+     */
+    @Deprecated
+    public BatchTransNotify newBatchTransNotify(Properties p)
+    {
+        return(
+            new BatchTransNotify(
+                buildConf(p, this.conf)
+        ));
+    }
+
+    public RefundFastpayByPlatformPwd newRefundFastpayByPlatformPwd()
+    {
+        return(
+            new RefundFastpayByPlatformPwd(
+                new Properties(this.conf)
+        ));
+    }
+
+    public RefundFastpayByPlatformPwd newRefundFastpayByPlatformPwd(Properties p)
+    {
+        return(
+            new RefundFastpayByPlatformPwd(
+                buildConf(p, this.conf)
+        ));
+    }
+
 
   // MISC
     protected static Properties buildConf(Properties prop, Properties defaults)

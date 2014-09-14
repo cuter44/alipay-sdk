@@ -2,6 +2,8 @@ package com.github.cuter44.alipay;
 
 import java.util.Properties;
 import java.util.Random;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -10,6 +12,25 @@ import com.github.cuter44.alipay.resps.*;
 
 public class stub
 {
+    public static void shellExecuteWindows(String url)
+    {
+        try
+        {
+            System.out.println("Execute:");
+            System.out.println(url);
+
+            Runtime.getRuntime().exec(
+                "rundll32 url.dll,FileProtocolHandler "+url
+            );
+
+            return;
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
     @Deprecated
     public static String demoTradeCreateByBuyer()
     {
@@ -160,25 +181,67 @@ public class stub
         }
     }
 
-
-    public static void shellExecuteWindows(String url)
+    @Deprecated
+    public static String demoBatchTransNotify()
     {
-        try
-        {
-            System.out.println("Execute:");
-            System.out.println(url);
+        Random rand = new Random();
 
-            Runtime.getRuntime().exec(
-                "rundll32 url.dll,FileProtocolHandler "+url
-            );
+        try{
+            AlipayFactory factory = AlipayFactory.getInstance();
 
-            return;
+            RequestBase req = factory.newBatchTransNotify()
+                .setProperty("account_name",    "广州金巽网络科技有限公司")
+                .setProperty("detail_data",     "out_trade_no-"+rand.nextLong()+"^"+"cuter44@qq.com"+"^"+"副主任大人"+"^"+"0.01"+"^"+"喵")
+                .setProperty("batch_no",        "batch"+rand.nextLong())
+                .setProperty("batch_num",       "1")
+                .setProperty("batch_fee",       "0.01")
+
+                .setProperty("notify_url",      "http://weixin.uutime.cn/nyagalin/gateway");
+
+            return(req.build().sign().toURL());
         }
         catch (Exception ex)
         {
             ex.printStackTrace();
+            return(null);
         }
     }
+
+
+    public static String demoRefundFastpayByPlatformPwd()
+    {
+        Random rand = new Random();
+
+        try{
+            AlipayFactory factory = AlipayFactory.getInstance();
+
+            RequestBase req = factory.newCreateDirectPayByUser()
+                .setProperty("out_trade_no",        "test"+rand.nextLong())
+                .setProperty("subject",             "即时到帐退款测试")
+                .setProperty("payment_type",        "1")
+                .setProperty("total_fee",           "0.01")
+                .setProperty("notify_url",          "http://weixin.uutime.cn/nyagalin/gateway");
+
+            shellExecuteWindows(req.build().sign().toURL());
+
+            System.out.println("Finish payment in your browser, back here and type in the trade_no:");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String trade_no = reader.readLine();
+
+            RequestBase req2 = factory.newRefundFastpayByPlatformPwd()
+                .setProperty("batch_no",        new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))
+                .setProperty("batch_num",       "1")
+                .setProperty("detail_data",     trade_no+"^0.01^退款测试");
+
+            return(req2.build().sign().toURL());
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return(null);
+        }
+    }
+
 
     public static void main(String[] args)
     {
@@ -193,9 +256,9 @@ public class stub
         //));
 
         // TESTCASE 5
-        shellExecuteWindows(
-            demoCreateDirectPayByUser()
-        );
+        //shellExecuteWindows(
+            //demoCreateDirectPayByUser()
+        //);
 
         // TESTCASE 6
         //demoTradeCreateByUserAndSendGoods();
@@ -203,5 +266,13 @@ public class stub
         // TESTCASE 7
         //shellExecuteWindows(demoCreateDirectPayByUserBank());
 
+        // TESTCASE 8
+        //shellExecuteWindows(
+            //demoBatchTransNotify()
+        //);
+
+        shellExecuteWindows(
+            demoRefundFastpayByPlatformPwd()
+        );
     }
 }
