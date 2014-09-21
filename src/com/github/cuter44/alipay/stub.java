@@ -242,6 +242,34 @@ public class stub
         }
     }
 
+    public static String demoCreatePartnerTradeByBuyer()
+    {
+        Random rand = new Random();
+
+        try{
+            AlipayFactory factory = AlipayFactory.getInstance();
+
+            RequestBase req = factory.newCreatePartnerTradeByBuyer()
+                .setProperty("out_trade_no",        "test"+rand.nextLong())
+                .setProperty("subject",             "平台商担保支付测试")
+                .setProperty("payment_type",        "1")
+                .setProperty("logistics_type",      "EXPRESS")
+                .setProperty("logistics_fee",       "0")
+                .setProperty("logistics_payment",   "BUYER_PAY")
+                .setProperty("price",               "0.01")
+                .setProperty("quantity",            "1")
+                //.setProperty("total_fee",           "0.01")
+                .setProperty("notify_url",          "http://weixin.uutime.cn/nyagalin/gateway");
+
+            return(req.build().sign().toURL());
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return(null);
+        }
+    }
+
 
     public static void main(String[] args)
     {
@@ -271,8 +299,14 @@ public class stub
             //demoBatchTransNotify()
         //);
 
+        // TESTCASE 9
+        //shellExecuteWindows(
+            //demoRefundFastpayByPlatformPwd()
+        //);
+
+        // TESTCASE 10
         shellExecuteWindows(
-            demoRefundFastpayByPlatformPwd()
+            demoCreatePartnerTradeByBuyer()
         );
     }
 }

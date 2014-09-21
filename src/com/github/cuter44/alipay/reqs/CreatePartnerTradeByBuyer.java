@@ -1,19 +1,18 @@
 package com.github.cuter44.alipay.reqs;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import java.io.UnsupportedEncodingException;
 
 import com.github.cuter44.alipay.*;
 import com.github.cuter44.alipay.resps.*;
 
-public class TradeCreateByBuyer extends WebRequestBase
+public class CreatePartnerTradeByBuyer extends WebRequestBase
 {
   // KEYS
     public static final List<String> KEYS_PARAM_NAME = Arrays.asList(
         "_input_charset",
-        "anti_phishing_key",
         "body",
         "buyer_account_name",
         "buyer_email",
@@ -21,13 +20,13 @@ public class TradeCreateByBuyer extends WebRequestBase
         "discount",
         "it_b_pay",
         "logistics_fee",
-        "logistics_fee_1",
-        "logistics_fee_2",
         "logistics_payment",
-        "logistics_payment_1",
-        "logistics_payment_2",
         "logistics_type",
+        "logistics_fee_1",
+        "logistics_payment_1",
         "logistics_type_1",
+        "logistics_fee_2",
+        "logistics_payment_2",
         "logistics_type_2",
         "notify_url",
         "out_trade_no",
@@ -36,8 +35,8 @@ public class TradeCreateByBuyer extends WebRequestBase
         "price",
         "quantity",
         "receive_address",
-        "receive_mobile",
         "receive_name",
+        "receive_mobile",
         "receive_phone",
         "receive_zip",
         "return_url",
@@ -47,37 +46,36 @@ public class TradeCreateByBuyer extends WebRequestBase
         "service",
         "show_url",
         "subject",
-        "t_b_rec_post",
         "t_s_send_1",
         "t_s_send_2",
+        "t_b_rec_post",
         "token",
         "total_fee"
     );
 
   // CONSTRUCT
-    public TradeCreateByBuyer(Properties prop)
+    public CreatePartnerTradeByBuyer(Properties prop)
     {
         super(prop);
-        this.setProperty("service", "trade_create_by_buyer");
+        this.setProperty("service", "create_partner_trade_by_buyer");
 
         return;
     }
 
   // SIGN
     @Override
-    public TradeCreateByBuyer sign()
-        throws UnsupportedEncodingException, IllegalStateException
+    public CreatePartnerTradeByBuyer sign()
+        throws UnsupportedEncodingException
     {
         this.sign(KEYS_PARAM_NAME);
         return(this);
     }
 
   // TO_URL
-    @Override
     public String toURL()
         throws UnsupportedEncodingException
     {
-        String charset = this.conf.getProperty(KEY_CHARSET);
+        String charset = this.getProperty(KEY_CHARSET);
 
         return(
             this.toSignedURL(KEYS_PARAM_NAME, charset)
@@ -87,7 +85,6 @@ public class TradeCreateByBuyer extends WebRequestBase
   // EXECUTE
     @Override
     public ResponseBase execute()
-        throws AlipayException
     {
         throw(new UnsupportedOperationException("This request should run on client."));
     }

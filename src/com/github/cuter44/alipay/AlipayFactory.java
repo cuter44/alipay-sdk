@@ -217,6 +217,22 @@ public class AlipayFactory
         ));
     }
 
+    public CreatePartnerTradeByBuyer newCreatePartnerTradeByBuyer()
+    {
+        return(
+            new CreatePartnerTradeByBuyer(
+                new Properties(this.conf)
+        ));
+    }
+
+    public CreatePartnerTradeByBuyer newCreatePartnerTradeByBuyer(Properties p)
+    {
+        return(
+            new CreatePartnerTradeByBuyer(
+                buildConf(p, this.conf)
+        ));
+    }
+
 
   // MISC
     protected static Properties buildConf(Properties prop, Properties defaults)
