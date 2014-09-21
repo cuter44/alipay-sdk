@@ -10,9 +10,8 @@ import java.io.UnsupportedEncodingException;
 import com.github.cuter44.alipay.*;
 import com.github.cuter44.alipay.resps.*;
 
-/** @deprecated not supported yet
+/** Warning: this is not fully tested.
  */
-@Deprecated
 public class BatchTransNotify extends WebRequestBase
 {
   // KEYS

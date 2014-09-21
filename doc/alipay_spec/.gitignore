@@ -9,3 +9,4 @@
 确认发货接口-send_goods_confirm_by_platform(20130530)
 手机网页即时到账接口-手机网页即时到账接口(20131121)
 纯网关接口-create_direct_pay_by_user(20140710)
+纯担保交易接口-create_partner_trade_by_buyer(20140122)

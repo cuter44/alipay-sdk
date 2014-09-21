@@ -179,9 +179,8 @@ public class AlipayFactory
         ));
     }
 
-    /** @deprecated not supported yet
+    /** Warning: this is not fully tested.
      */
-    @Deprecated
     public BatchTransNotify newBatchTransNotify()
     {
         return(
@@ -190,9 +189,8 @@ public class AlipayFactory
         ));
     }
 
-    /** @deprecated not supported yet
+    /** Warning: this is not fully tested.
      */
-    @Deprecated
     public BatchTransNotify newBatchTransNotify(Properties p)
     {
         return(
@@ -213,6 +211,22 @@ public class AlipayFactory
     {
         return(
             new RefundFastpayByPlatformPwd(
+                buildConf(p, this.conf)
+        ));
+    }
+
+    public CreatePartnerTradeByBuyer newCreatePartnerTradeByBuyer()
+    {
+        return(
+            new CreatePartnerTradeByBuyer(
+                new Properties(this.conf)
+        ));
+    }
+
+    public CreatePartnerTradeByBuyer newCreatePartnerTradeByBuyer(Properties p)
+    {
+        return(
+            new CreatePartnerTradeByBuyer(
                 buildConf(p, this.conf)
         ));
     }
