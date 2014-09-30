@@ -5,6 +5,9 @@ KEY=4h8ir5aba81u2b4sb50sr###########
 sign_type=MD5
 sec_id=MD5
 
+# NAME
+account_name=your_company_name
+
 # PID
 # PID not actually used, fill other parameter follow this↓ sample
 #PID=2088511844407314
@@ -12,7 +15,7 @@ partner=2088511844407314
 seller_id=2088511844407314
 seller_user_id=2088511844407314
 
-#email
+# EMAIL
 email=name@host.com
 seller_account_name=name@host.com
 

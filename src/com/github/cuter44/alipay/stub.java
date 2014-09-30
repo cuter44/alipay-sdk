@@ -1,14 +1,17 @@
 package com.github.cuter44.alipay;
 
+import static java.lang.Math.abs;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Date;
+import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import com.github.cuter44.alipay.reqs.*;
 import com.github.cuter44.alipay.resps.*;
+import com.github.cuter44.alipay.helper.*;
 
 public class stub
 {
@@ -190,11 +193,18 @@ public class stub
             AlipayFactory factory = AlipayFactory.getInstance();
 
             RequestBase req = factory.newBatchTransNotify()
-                .setProperty("account_name",    "广州金巽网络科技有限公司")
-                .setProperty("detail_data",     "out_trade_no-"+rand.nextLong()+"^"+"cuter44@qq.com"+"^"+"副主任大人"+"^"+"0.01"+"^"+"喵")
-                .setProperty("batch_no",        "batch"+rand.nextLong())
-                .setProperty("batch_num",       "1")
-                .setProperty("batch_fee",       "0.01")
+                .setPaymentDetail(
+                    new PaymentDetailList(
+                        Arrays.asList(
+                            new PaymentItem(Long.toString(abs(rand.nextLong())), "cuter44@qq.com",   "吴嘉林", 0.01, "支付宝商家付款测试, 么么哒"),
+                            new PaymentItem(Long.toString(abs(rand.nextLong())), "18825180163",      "陈晓杰", 0.01, "支付宝商家付款测试, 么么哒"),
+                            new PaymentItem(Long.toString(abs(rand.nextLong())), "468859947@qq.com", "黄文杰", 0.01, "支付宝商家付款测试, 么么哒"),
+                            new PaymentItem(Long.toString(abs(rand.nextLong())), "18814127437",      "陈蔓青", 0.01, "支付宝商家付款测试, 么么哒"),
+                            new PaymentItem(Long.toString(abs(rand.nextLong())), "13538805651",      "马楚鸿", 0.01, "支付宝商家付款测试, 么么哒")
+                        )
+                    )
+                )
+                .setProperty("batch_no",        "batch"+abs(rand.nextLong()))
 
                 .setProperty("notify_url",      "http://weixin.uutime.cn/nyagalin/gateway");
 
@@ -251,6 +261,7 @@ public class stub
 
             RequestBase req = factory.newCreatePartnerTradeByBuyer()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
+                .setProperty("seller_email",        "13622833735")
                 .setProperty("subject",             "平台商担保支付测试")
                 .setProperty("payment_type",        "1")
                 .setProperty("logistics_type",      "EXPRESS")
@@ -295,9 +306,9 @@ public class stub
         //shellExecuteWindows(demoCreateDirectPayByUserBank());
 
         // TESTCASE 8
-        //shellExecuteWindows(
-            //demoBatchTransNotify()
-        //);
+        shellExecuteWindows(
+            demoBatchTransNotify()
+        );
 
         // TESTCASE 9
         //shellExecuteWindows(
@@ -305,8 +316,8 @@ public class stub
         //);
 
         // TESTCASE 10
-        shellExecuteWindows(
-            demoCreatePartnerTradeByBuyer()
-        );
+        //shellExecuteWindows(
+            //demoCreatePartnerTradeByBuyer()
+        //);
     }
 }

@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 
 import com.github.cuter44.alipay.*;
 import com.github.cuter44.alipay.resps.*;
+import com.github.cuter44.alipay.helper.*;
 
 /** Warning: this is not fully tested.
  */
@@ -69,5 +70,20 @@ public class BatchTransNotify extends WebRequestBase
     public ResponseBase execute()
     {
         throw(new UnsupportedOperationException("This request should run on client."));
+    }
+
+  // EXTRA
+    /** Inject <code>payment_detail</code>, <code>batch_num</code> and <code>batch_fee</code> into this request.
+     * <br />
+     * Notice that this is an instant method, setPaymentDetail reads a snapshot of PDL.
+     * Changes to PDL after invoking this method will not take effect.
+     */
+    public BatchTransNotify setPaymentDetail(PaymentDetailList l)
+    {
+        this.setProperty("detail_data", l.getDetailData())
+            .setProperty("batch_num", l.getBatchNum())
+            .setProperty("batch_fee", l.getBatchFee());
+
+        return(this);
     }
 }
