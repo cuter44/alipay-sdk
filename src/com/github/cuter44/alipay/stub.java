@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 
 import com.github.cuter44.alipay.reqs.*;
 import com.github.cuter44.alipay.resps.*;
+import com.github.cuter44.alipay.constants.*;
 import com.github.cuter44.alipay.helper.*;
 
 public class stub
@@ -43,14 +44,33 @@ public class stub
             AlipayFactory factory = AlipayFactory.getInstance();
 
             RequestBase req = factory.newTradeCreateByBuyer()
-                .setProperty("out_trade_no",        "test"+rand.nextLong())
-                .setProperty("subject",             "标准双接口支付测试")
-                .setProperty("payment_type",        "1")
-                .setProperty("logistics_type",      "EMS")
-                .setProperty("logistics_fee",       "0.01")
-                .setProperty("logistics_payment",   "SELLER_PAY")
+                .setOutTradeNo("test"+rand.nextLong())
+                // equals to:
+                //.setProperty("out_trade_no",        "test"+rand.nextLong())
+
+                .setSubject("标准双接口支付测试")
+                // equals to:
+                //.setProperty("subject",             "标准双接口支付测试")
+
+                .setLogistics(
+                    new Logistics(
+                        LogisticsType.EXPRESS, 0.01, LogisticsPayment.BUYER_PAY_AFTER_RECEIVE
+                    ),
+                    new Logistics(
+                        LogisticsType.EMS, 0.01, LogisticsPayment.BUYER_PAY
+                    ),
+                    new Logistics(
+                        LogisticsType.POST, 0.01, LogisticsPayment.SELLER_PAY
+                    )
+                )
+                // similar to: (not fully listed)
+                //.setProperty("logistics_type",      "EXPRESS")
+                //.setProperty("logistics_fee",       "0.01")
+                //.setProperty("logistics_payment",   "BUYER_PAY_AFTER_RECEIVE")
+
+                //.setBuyer(AlipayAccount.withEmail("cuter44@qq.com"))
                 .setProperty("price",               "2.00")
-                .setProperty("quantity",            "1");
+                .setProperty("qusantity",            "1");
 
             return(req.build().sign().toURL());
         }
@@ -195,13 +215,11 @@ public class stub
             RequestBase req = factory.newBatchTransNotify()
                 .setPaymentDetail(
                     new PaymentDetailList(
-                        Arrays.asList(
-                            new PaymentItem(Long.toString(abs(rand.nextLong())), "cuter44@qq.com",   "吴嘉林", 0.01, "支付宝商家付款测试, 么么哒"),
-                            new PaymentItem(Long.toString(abs(rand.nextLong())), "18825180163",      "陈晓杰", 0.01, "支付宝商家付款测试, 么么哒"),
-                            new PaymentItem(Long.toString(abs(rand.nextLong())), "468859947@qq.com", "黄文杰", 0.01, "支付宝商家付款测试, 么么哒"),
-                            new PaymentItem(Long.toString(abs(rand.nextLong())), "18814127437",      "陈蔓青", 0.01, "支付宝商家付款测试, 么么哒"),
-                            new PaymentItem(Long.toString(abs(rand.nextLong())), "13538805651",      "马楚鸿", 0.01, "支付宝商家付款测试, 么么哒")
-                        )
+                        new PaymentItem(Long.toString(abs(rand.nextLong())), "cuter44@qq.com",   "吴嘉林", 0.01, "支付宝商家付款测试, 么么哒"),
+                        new PaymentItem(Long.toString(abs(rand.nextLong())), "18825180163",      "陈晓杰", 0.01, "支付宝商家付款测试, 么么哒"),
+                        new PaymentItem(Long.toString(abs(rand.nextLong())), "468859947@qq.com", "黄文杰", 0.01, "支付宝商家付款测试, 么么哒"),
+                        new PaymentItem(Long.toString(abs(rand.nextLong())), "18814127437",      "陈蔓青", 0.01, "支付宝商家付款测试, 么么哒"),
+                        new PaymentItem(Long.toString(abs(rand.nextLong())), "13538805651",      "马楚鸿", 0.01, "支付宝商家付款测试, 么么哒")
                     )
                 )
                 .setProperty("batch_no",        "batch"+abs(rand.nextLong()))
@@ -285,7 +303,7 @@ public class stub
     public static void main(String[] args)
     {
         // TESTCASE 1
-        //shellExecuteWindows(demoTradeCreateByBuyer());
+        shellExecuteWindows(demoTradeCreateByBuyer());
 
         // TESTCASE 4
         // need to change borwser UA to run, see doc/ for a avaliable UA.
@@ -306,9 +324,9 @@ public class stub
         //shellExecuteWindows(demoCreateDirectPayByUserBank());
 
         // TESTCASE 8
-        shellExecuteWindows(
-            demoBatchTransNotify()
-        );
+        //shellExecuteWindows(
+            //demoBatchTransNotify()
+        //);
 
         // TESTCASE 9
         //shellExecuteWindows(

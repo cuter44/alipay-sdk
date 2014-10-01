@@ -23,6 +23,17 @@ public class PaymentDetailList extends ArrayList<IPaymentItem>
         return;
     }
 
+    public PaymentDetailList(PaymentItem... paymentItems)
+    {
+        this();
+
+        this.ensureCapacity(paymentItems.length);
+        for (PaymentItem i:paymentItems)
+            this.add(i);
+
+        return;
+    }
+
   // ADD
     protected void sizeConstraint(int size)
     {

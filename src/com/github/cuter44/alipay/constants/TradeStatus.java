@@ -30,15 +30,11 @@ public enum TradeStatus
   // INDEX/REFLECT
     private static Map<Integer, TradeStatus> idxCode = new HashMap<Integer, TradeStatus>();
 
-    /** 从错误代码实例化
-     */
     public static TradeStatus forCode(int code)
     {
         return(idxCode.get(code));
     }
 
-    /** 从错误名实例化
-     */
     public static TradeStatus forName(String name)
     {
         return(

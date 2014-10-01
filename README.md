@@ -1,15 +1,29 @@
 # 支付宝服务器端SDK for Java / alipay seller-side sdk for Java  
 
+## License/授权
+
+POSTCARDWARE branch cuter44.alipay-sdk
+
+License-free, you can do whatever you want. PR are welcomed.  
+Additionally, if you find this helps and want to encourage us, a postcard will be nice:
+
+5+0  
+23-607, Huashan Dormitory, South China Agricultural University  
+Guangzhou, Guangdong 510642  
+China  
+
+Contributors would add name/address to the credit list.
+
 ## Disclaimer/免责声明
 
-Though I make effort to not stealing your money or any secret about your alipay account, or leak to third-party. But I am still not responsable for any direct or indriect lost for your using of these (or part of) source code. It is your responsibility to check any risk before apply them.  
+Though I make effort to not steal your money or any secret about your alipay account, or leak to third-party. But I am still not responsable for any direct or indriect lost for your using of these (or part of) source code. It is your responsibility to check any risk before apply them.  
 
 作者不对使用代码所带来的直接或间接损失负责. 由于源代码是公开的, 检查和确保代码的安全性是属于使用者的职责. 请时刻清醒地意识这一点.  
 
 ## Tutorial/教程
 
 Frist of all, ensure you have `jdk` and `apache-ant`.  
-Development environment applied `Oracle-jdk 1.7` and `apache-ant-1.9.2`, all goes well.
+Development environment applied `Oracle-jdk 1.7` and `apache-ant-1.9.2`, all goes well.  
 
 1. Generated jar file
 
@@ -25,6 +39,8 @@ the jar-file mentioned above
 3. Invoke
 
 demos are provided in `src/com/github/cuter44/stub.java`.
+
+Thanks to GFW, it is such a tough thing to upload binary release to Github. Sorry for that.  
 
 首先, 你要有一个 `jdk` 和 `apache-ant`. 开发环境使用 Oracle家的jdk7 和 ant 1.9.2, 请依个人喜好酌量添加.
 
@@ -121,6 +137,6 @@ Listed as below, indluding related API.
 
 ## Detailed docs/详细文档
 
-For questions with alipay, ask your search engineer.
-For javadoc, run `ant javadoc`.
-For bugs/issues, thanks for visiting [https://github.com/cuter44/alipay-sdk/issues](https://github.com/cuter44/alipay-sdk/issues)
+For questions with alipay, ask your search engineer.  
+For javadoc, run `ant javadoc`.  
+For bugs/issues, thanks for visiting [https://github.com/cuter44/alipay-sdk/issues](https://github.com/cuter44/alipay-sdk/issues)  

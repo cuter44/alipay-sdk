@@ -78,4 +78,20 @@ public abstract class WebRequestBase extends RequestBase
         return(ub.toString());
     }
 
+  // PROPERTY
+  // Below are most-general properties. Some of them may not work on certain type of reqs,
+  // calling these api will not cause any effect or side-effect.
+    public WebRequestBase setReturnUrl(String returnUrl)
+    {
+        this.setProperty("return_url", returnUrl);
+
+        return(this);
+    }
+
+    public WebRequestBase setNotifyUrl(String notifyUrl)
+    {
+        this.setProperty("notify_url", notifyUrl);
+
+        return(this);
+    }
 }
