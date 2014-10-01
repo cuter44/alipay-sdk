@@ -67,7 +67,7 @@
 
   <!-- 生成javadoc -->
   <target name="javadoc" description="生成javadoc">
-    <javadoc sourcepath="${srcdir}" destdir="${javadocdir}" private="true" classpathref="classpath"/>
+    <javadoc sourcepath="${srcdir}" destdir="${javadocdir}" private="true" classpathref="classpath" encoding="utf-8"/>
   </target>
 
   <!-- jar -->
