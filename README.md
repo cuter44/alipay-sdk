@@ -4,8 +4,9 @@
 
 POSTCARDWARE branch cuter44.alipay-sdk
 
-License-free, you can do whatever you want. PR are welcomed.  
-Additionally, if you find this helps and want to encourage us, a postcard will be nice:
+As long as you retain the contributors' name, you are agreed to do whatever you want.  
+PR/contributions are welcomed, as long as you agree with the upper line.  
+Additionally, if you find this helps and want to encourage us, a postcard will be nice:  
 
 5+0  
 23-607, Huashan Dormitory, South China Agricultural University  
@@ -127,16 +128,18 @@ Listed as below, indluding related API.
 
 ```
 // BETA
-标准双接口-trade_create_by_buyer(20140122)
 即时到账交易接口-create_direct_pay_by_user(20140617)
-确认发货接口-send_goods_confirm_by_platform(20130530)
-手机网页即时到账接口-wap_trade_create_redirect(20131121)
-// TODO
 即时到账批量退款有密接口-refund_fastpay_by_platform_pwd(20130621)
+手机网页即时到账接口-手机网页即时到账接口(20131121)
+批量付款到支付宝账户有密接口-batch_trans_notify(20140617)
+标准双接口-trade_create_by_buyer(20140122)
+确认发货接口-send_goods_confirm_by_platform(20130530)
+纯担保交易接口-create_partner_trade_by_buyer(20140122)
+纯网关接口-create_direct_pay_by_user(20140710)
 ```
 
 ## Detailed docs/详细文档
 
 For questions with alipay, ask your search engineer.  
-For javadoc, run `ant javadoc`.  
+For javadoc, run `ant javadoc`(recommended), or visit [http://cuter44.github.io/alipay-sdk/](http://cuter44.github.io/alipay-sdk/).  
 For bugs/issues, thanks for visiting [https://github.com/cuter44/alipay-sdk/issues](https://github.com/cuter44/alipay-sdk/issues)  
