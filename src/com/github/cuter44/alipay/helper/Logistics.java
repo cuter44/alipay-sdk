@@ -1,5 +1,7 @@
 package com.github.cuter44.alipay.helper;
 
+import static java.lang.Math.signum;
+
 import com.github.cuter44.alipay.constants.*;
 
 /** Wrapper data structure for logistics info.
@@ -28,8 +30,8 @@ public class Logistics
 
     public void setLogisticsFee(Double newLogisticsFee)
     {
-        if (newLogisticsFee<=0.00)
-            throw(new IllegalArgumentException("Negative amount not allowed:"+newLogisticsFee));
+        if (signum(newLogisticsFee)<-0.5)
+            throw(new IllegalArgumentException("Negative lgoistics fee not allowed:"+newLogisticsFee));
 
         this.logisticsFee = newLogisticsFee;
 

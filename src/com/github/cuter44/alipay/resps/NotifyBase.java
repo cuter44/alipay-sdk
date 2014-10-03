@@ -1,14 +1,20 @@
 package com.github.cuter44.alipay.resps;
 
 import java.util.Properties;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParsePosition;
 
 import com.github.cuter44.alipay.AlipayFactory;
 import com.github.cuter44.alipay.reqs.NotifyVerify;
+import com.github.cuter44.alipay.constants.*;
 
 public class NotifyBase extends ResponseBase
 {
   // CONSTANTS
     protected static final String KEY_NOTIFY_ID = "notify_id";
+    protected static final String KEY_NOTIFY_TYPE = "notify_type";
+    protected static final String KEY_NOTIFY_TIME = "notify_time";
 
   // CONSTRUCT
     public NotifyBase(ResponseBase resp)
@@ -39,6 +45,14 @@ public class NotifyBase extends ResponseBase
     }
 
   // GET
+    public String getProperty(String key)
+    {
+        return(
+            this.respProp.getProperty(key)
+        );
+    }
+
+  // PROPERTY
     public String getNotifyId()
     {
         return(
@@ -46,12 +60,24 @@ public class NotifyBase extends ResponseBase
         );
     }
 
-    public String getParam(String key)
+    public NotifyType getNotifyType()
     {
         return(
-            this.respProp.getProperty(key)
+            NotifyType.forName(
+                this.respProp.getProperty(KEY_NOTIFY_TYPE)
+            )
         );
     }
 
+    public Date getNotifyTime()
+    {
+        return(
+            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                .parse(
+                    this.respProp.getProperty(KEY_NOTIFY_TIME),
+                    new ParsePosition(1)
+                )
+        );
+    }
 
 }

@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 import com.github.cuter44.alipay.*;
 import com.github.cuter44.alipay.resps.*;
 
-public class CreateDirectPayByUser extends WebRequestBase
+public class CreateDirectPayByUser extends CreateTradeBase
 {
   // KEYS
     public static final List<String> KEYS_PARAM_NAME = Arrays.asList(

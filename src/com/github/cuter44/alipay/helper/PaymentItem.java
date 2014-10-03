@@ -1,5 +1,7 @@
 package com.github.cuter44.alipay.helper;
 
+import static java.lang.Math.signum;
+
 public class PaymentItem
     implements IPaymentItem
 {
@@ -56,8 +58,8 @@ public class PaymentItem
 
     public void setAmount(Double newAmount)
     {
-        if (newAmount<=0.00)
-            throw(new IllegalArgumentException("Negative amount not allowed:"+newAmount));
+        if (signum(newAmount)<=0.5)
+            throw(new IllegalArgumentException("Positive payment required:"+newAmount));
 
         this.amount = newAmount;
     }
