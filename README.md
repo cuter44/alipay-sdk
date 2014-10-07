@@ -2,18 +2,7 @@
 
 ## License/授权
 
-POSTCARDWARE branch cuter44.alipay-sdk
-
-As long as you retain the contributors' name, you are agreed to do whatever you want.  
-PR/contributions are welcomed, as long as you agree with the upper line.  
-Additionally, if you find this helps and want to encourage us, a postcard will be nice:  
-
-5+0  
-23-607, Huashan Dormitory, South China Agricultural University  
-Guangzhou, Guangdong 510642  
-China  
-
-Contributors would add name/address to the credit list.
+see LICENSE.md
 
 ## Disclaimer/免责声明
 
@@ -39,7 +28,7 @@ the jar-file mentioned above
 
 3. Invoke
 
-demos are provided in `src/com/github/cuter44/stub.java`.
+demos are provided in `src/com/github/cuter44/test.java`.
 
 Thanks to GFW, it is such a tough thing to upload binary release to Github. Sorry for that.  
 
@@ -47,7 +36,7 @@ Thanks to GFW, it is such a tough thing to upload binary release to Github. Sorr
 
 1. 编译: 执行 `ant jar`, 然后你就有个jar了....  
 2. 配置: 将那个jar加到你的classpath, 然后还需要一个配置文件, 怎么写参见 `doc/alipay.properties.sample`  
-3. 调用: 参见 `src/com/github/cuter44/stub.java`.
+3. 调用: 参见 `src/com/github/cuter44/test.java`.
 
 ## Sample/样例
 
@@ -141,5 +130,5 @@ Listed as below, indluding related API.
 ## Detailed docs/详细文档
 
 For questions with alipay, ask your search engineer.  
-For javadoc, run `ant javadoc`(recommended), or visit [http://cuter44.github.io/alipay-sdk/](http://cuter44.github.io/alipay-sdk/).  
+For javadoc, run `ant javadoc`(recommended), or visit [http://cuter44.github.io/alipay-sdk/javadoc/](http://cuter44.github.io/alipay-sdk/javadoc/).  
 For bugs/issues, thanks for visiting [https://github.com/cuter44/alipay-sdk/issues](https://github.com/cuter44/alipay-sdk/issues)  

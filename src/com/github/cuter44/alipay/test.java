@@ -8,29 +8,31 @@ import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.awt.Desktop;
 
 import com.github.cuter44.alipay.reqs.*;
 import com.github.cuter44.alipay.resps.*;
 import com.github.cuter44.alipay.constants.*;
 import com.github.cuter44.alipay.helper.*;
 
-public class stub
+/**
+ * HINT: READ SOURCE CODE before you run these test!!
+ */
+public class test
 {
-    public static void shellExecuteWindows(String url)
+    public static void browserOpen(String url)
     {
         try
         {
             System.out.println("Execute:");
             System.out.println(url);
 
-            Runtime.getRuntime().exec(
-                "rundll32 url.dll,FileProtocolHandler "+url
-            );
-
-            return;
+            Desktop.getDesktop().browse(new URI(url));
         }
         catch (Exception ex)
         {
+            System.out.println("Your OS seems not supporting a desktop browser, which is required... (´・ω・｀)");
             ex.printStackTrace();
         }
     }
@@ -69,8 +71,8 @@ public class stub
                 //.setProperty("logistics_payment",   "BUYER_PAY_AFTER_RECEIVE")
 
                 //.setBuyer(AlipayAccount.withEmail("cuter44@qq.com"))
-                .setProperty("price",               "2.00")
-                .setProperty("qusantity",            "1");
+                .setPrice(2.00)
+                .setQuantity(1);
 
             return(req.build().sign().toURL());
         }
@@ -129,10 +131,20 @@ public class stub
             AlipayFactory factory = AlipayFactory.getInstance();
 
             RequestBase req = factory.newCreateDirectPayByUser()
+                .setRoyalty(
+                    new RoyaltyList(
+                        new PaymentItem("468859947@qq.com", 1.00, "一级分润"),
+                        new PaymentItem("468859947@qq.com", "18825166523", 0.50, "二级分润")
+                    ).validate(2.00)
+                )
+                // equals to:
+                //.setProperty("royalty_type","10")
+                //.setProperty("royalty_parameters","468859947@qq.com^0.50^平级分润测试|18825166523^0.50^平级分润测试");
+
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
                 .setProperty("subject",             "直接到帐支付测试")
                 .setProperty("payment_type",        "1")
-                .setProperty("total_fee",           "0.01")
+                .setProperty("total_fee",           "2.00")
                 .setProperty("notify_url",          "http://weixin.uutime.cn/nyagalin/gateway");
 
             return(req.build().sign().toURL());
@@ -184,7 +196,7 @@ public class stub
                 .setProperty("price",               "0.01")
                 .setProperty("quantity",            "1");
 
-            shellExecuteWindows(req1.build().sign().toURL());
+            browserOpen(req1.build().sign().toURL());
             System.out.println("Finish payment in your browser, back here and type in the trade_no:");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String trade_no = reader.readLine();
@@ -250,7 +262,7 @@ public class stub
                 .setProperty("total_fee",           "0.01")
                 .setProperty("notify_url",          "http://weixin.uutime.cn/nyagalin/gateway");
 
-            shellExecuteWindows(req.build().sign().toURL());
+            browserOpen(req.build().sign().toURL());
 
             System.out.println("Finish payment in your browser, back here and type in the trade_no:");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -299,21 +311,47 @@ public class stub
         }
     }
 
+    public static String donateToAuthor()
+    {
+        Random rand = new Random();
+
+        try{
+            AlipayFactory factory = AlipayFactory.getInstance();
+
+            RequestBase req = factory.newCreateDirectPayByUser()
+                .setRoyalty(
+                    new RoyaltyList(
+                        new PaymentItem("cuter44@qq.com", 1.00, "辛苦了这是小鱼干(alipay-sdk)")
+                    )
+                )
+                .setProperty("out_trade_no",        "nyaguru"+rand.nextLong())
+                .setProperty("subject",             "捐赠给支付宝SDK作者")
+                .setProperty("payment_type",        "1")
+                .setProperty("total_fee",           "1.02");
+
+            return(req.build().sign().toURL());
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return(null);
+        }
+    }
 
     public static void main(String[] args)
     {
         // TESTCASE 1
-        shellExecuteWindows(demoTradeCreateByBuyer());
+        //browserOpen(demoTradeCreateByBuyer());
 
         // TESTCASE 4
         // need to change borwser UA to run, see doc/ for a avaliable UA.
-        //shellExecuteWindows(
+        //browserOpen(
             //demoWapAuthAndExecute(
                 //demoWapTradeCreateDirect().getProperties()
         //));
 
         // TESTCASE 5
-        //shellExecuteWindows(
+        //browserOpen(
             //demoCreateDirectPayByUser()
         //);
 
@@ -321,21 +359,29 @@ public class stub
         //demoTradeCreateByUserAndSendGoods();
 
         // TESTCASE 7
-        //shellExecuteWindows(demoCreateDirectPayByUserBank());
+        //browserOpen(demoCreateDirectPayByUserBank());
 
         // TESTCASE 8
-        //shellExecuteWindows(
+        //browserOpen(
             //demoBatchTransNotify()
         //);
 
         // TESTCASE 9
-        //shellExecuteWindows(
+        //browserOpen(
             //demoRefundFastpayByPlatformPwd()
         //);
 
         // TESTCASE 10
-        //shellExecuteWindows(
+        //browserOpen(
             //demoCreatePartnerTradeByBuyer()
         //);
+
+        // Donate to author~
+        // As LICENSE.md states, a postcard is more preferred.
+        // But if you are too busy, there is an alternative...
+        // After all, thanks~
+        browserOpen(
+            donateToAuthor()
+        );
     }
 }

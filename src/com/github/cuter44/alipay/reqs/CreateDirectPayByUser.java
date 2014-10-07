@@ -7,10 +7,15 @@ import java.io.UnsupportedEncodingException;
 
 import com.github.cuter44.alipay.*;
 import com.github.cuter44.alipay.resps.*;
+import com.github.cuter44.alipay.helper.*;
 
 public class CreateDirectPayByUser extends CreateTradeBase
 {
   // KEYS
+    public static final String KEY_ROYALTY_TYPE        = "royalty_type";
+    public static final String KEY_ROYALTY_TYPE_V      = "10";
+    public static final String KEY_ROYALTY_PARAMETERS  = "royalty_parameters";
+
     public static final List<String> KEYS_PARAM_NAME = Arrays.asList(
         "_input_charset",
         "anti_phishing_key",
@@ -84,5 +89,14 @@ public class CreateDirectPayByUser extends CreateTradeBase
     public ResponseBase execute()
     {
         throw(new UnsupportedOperationException("This request should run on client."));
+    }
+
+  // PROPERTY
+    public CreateDirectPayByUser setRoyalty(RoyaltyList l)
+    {
+        this.setProperty(KEY_ROYALTY_TYPE, KEY_ROYALTY_TYPE_V);
+        this.setProperty(KEY_ROYALTY_PARAMETERS, l.getRoyaltyParameters());
+
+        return(this);
     }
 }

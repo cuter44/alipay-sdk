@@ -4,6 +4,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * <b>Note that this implementation is not synchronized.</b> If multiple threads access an <code>RoyaltyList</code> instance concurrently,
+ * and at least one of the threads modifies the list structurally, it must be synchronized externally.
+ */
 public class PaymentDetailList extends ArrayList<IPaymentItem>
 {
     public static final int MAX_CAPACITY = 1000;
@@ -23,12 +27,12 @@ public class PaymentDetailList extends ArrayList<IPaymentItem>
         return;
     }
 
-    public PaymentDetailList(PaymentItem... paymentItems)
+    public PaymentDetailList(IPaymentItem... paymentItems)
     {
         this();
 
         this.ensureCapacity(paymentItems.length);
-        for (PaymentItem i:paymentItems)
+        for (IPaymentItem i:paymentItems)
             this.add(i);
 
         return;
@@ -45,7 +49,7 @@ public class PaymentDetailList extends ArrayList<IPaymentItem>
 
 
     /**
-     * @exception IndexOutOfBoundsException on size>1000, according to alipay spec.
+     * @exception IndexOutOfBoundsException on size%gt;1000, according to alipay spec.
      */
     @Override
     public boolean add(IPaymentItem e)
@@ -58,7 +62,7 @@ public class PaymentDetailList extends ArrayList<IPaymentItem>
     }
 
     /**
-     * @exception IndexOutOfBoundsException on size>1000, according to alipay spec.
+     * @exception IndexOutOfBoundsException on size%gt;1000, according to alipay spec.
      */
     @Override
     public void add(int index, IPaymentItem e)
@@ -71,7 +75,7 @@ public class PaymentDetailList extends ArrayList<IPaymentItem>
     }
 
     /**
-     * @exception IndexOutOfBoundsException on size>1000, according to alipay spec.
+     * @exception IndexOutOfBoundsException on size%gt;1000, according to alipay spec.
      */
     @Override
     public boolean addAll(Collection<? extends IPaymentItem> c)
@@ -84,7 +88,7 @@ public class PaymentDetailList extends ArrayList<IPaymentItem>
     }
 
     /**
-     * @exception IndexOutOfBoundsException on size>1000, according to alipay spec.
+     * @exception IndexOutOfBoundsException on size%gt;1000, according to alipay spec.
      */
     @Override
     public boolean addAll(int index, Collection<? extends IPaymentItem> c)

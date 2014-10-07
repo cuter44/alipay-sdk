@@ -3,10 +3,11 @@ package com.github.cuter44.alipay.helper;
 import static java.lang.Math.signum;
 
 public class PaymentItem
-    implements IPaymentItem
+    implements IPaymentItem, IRoyaltyItem
 {
   // FIELDS
     public String sn;
+    public String payAccount;
     public String account;
     public String name;
     public Double amount;
@@ -26,6 +27,20 @@ public class PaymentItem
     public String getSn()
     {
         return(this.sn);
+    }
+
+    public void setPayAccount(String newAccount)
+    {
+        if (newAccount.contains("|") || newAccount.contains("^"))
+            throw(new IllegalArgumentException("Reeserved char found:"+newAccount));
+
+        this.payAccount = newAccount;
+    }
+
+    @Override
+    public String getPayAccount()
+    {
+        return(this.payAccount);
     }
 
     public void setAccount(String newAccount)
@@ -85,6 +100,8 @@ public class PaymentItem
     }
 
   // CONSTRUCT
+    /** constructor for refund
+     */
     public PaymentItem(String sn, String account, String name, Double amount, String memo)
     {
         this.setSn(sn);
@@ -92,6 +109,28 @@ public class PaymentItem
         this.setName(name);
         this.setAmount(amount);
         this.setMemo(memo);
+
+        return;
+    }
+
+    /** constructor for royalty
+     */
+    public PaymentItem(String account, Double amount, String memo)
+    {
+        this.setAccount(account);
+        this.setAmount(amount);
+        this.setMemo(memo);
+
+        return;
+    }
+
+    /** constructor for royalty
+     */
+    public PaymentItem(String payAccount, String account, Double amount, String memo)
+    {
+        this(account, amount, memo);
+
+        this.setPayAccount(payAccount);
 
         return;
     }
