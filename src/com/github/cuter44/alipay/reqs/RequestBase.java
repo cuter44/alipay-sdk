@@ -88,6 +88,9 @@ public abstract class RequestBase
     protected String signMD5(List<String> paramNames, String key, String charset)
         throws UnsupportedEncodingException
     {
+        if (key == null)
+            throw(new IllegalArgumentException("No KEY, no sign. Please check your configuration."));
+
         StringBuilder sb = new StringBuilder()
             .append(this.toQueryString(paramNames))
             .append(key);

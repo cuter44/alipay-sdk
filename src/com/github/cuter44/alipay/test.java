@@ -327,7 +327,7 @@ public class test
                 .setProperty("out_trade_no",        "nyaguru"+rand.nextLong())
                 .setProperty("subject",             "捐赠给支付宝SDK作者")
                 .setProperty("payment_type",        "1")
-                .setProperty("total_fee",           "1.02");
+                .setProperty("total_fee",           "1.01");
 
             return(req.build().sign().toURL());
         }
