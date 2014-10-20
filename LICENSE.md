@@ -5,8 +5,8 @@ PR/contributions are welcomed, as long as you agree with the upper line.
 Additionally, if you find this helps and want to encourage us, a postcard will be nice:  
 
 5+0  
-23-607, Huashan Dormitory, South China Agricultural University  
-Guangzhou, Guangdong 510642  
+Rm. 902, No.13 Meijing Rd., Changxing St.  
+Guangzhou, Guangdong 510000  
 China  
 
 Contributors would add name/address to the credit list.

@@ -80,24 +80,10 @@ public class XMLParser
             parser.parse(source, pc);
             return(pc.returnProperties());
         }
-        catch (UnsupportedEncodingException ex)
+        catch (Exception ex)
         {
-            ex.printStackTrace();
+            throw(new RuntimeException(ex.getMessage(), ex));
         }
-        catch (ParserConfigurationException ex)
-        {
-            ex.printStackTrace();
-        }
-        catch (SAXException ex)
-        {
-            ex.printStackTrace();
-        }
-        catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return(null);
     }
 
     public static void main(String[] args)

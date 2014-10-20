@@ -43,7 +43,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newTradeCreateByBuyer()
                 .setOutTradeNo("test"+rand.nextLong())
@@ -88,7 +88,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newWapTradeCreateDirect()
                 .setProperty("req_id",              "test"+rand.nextLong())
@@ -111,7 +111,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newWapAuthAndExecute(prop);
             return(req.build().sign().toURL());
@@ -128,7 +128,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newCreateDirectPayByUser()
                 .setRoyalty(
@@ -161,7 +161,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newCreateDirectPayByUserBank()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
@@ -184,7 +184,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req1 = factory.newTradeCreateByBuyer()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
@@ -222,7 +222,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newBatchTransNotify()
                 .setPaymentDetail(
@@ -253,7 +253,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newCreateDirectPayByUser()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
@@ -287,7 +287,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newCreatePartnerTradeByBuyer()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
@@ -316,7 +316,7 @@ public class test
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = AlipayFactory.getInstance();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newCreateDirectPayByUser()
                 .setRoyalty(

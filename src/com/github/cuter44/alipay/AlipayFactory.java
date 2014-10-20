@@ -17,9 +17,60 @@ public class AlipayFactory
   // CONFIG
     protected Properties conf;
 
+    public Properties getConf()
+    {
+        return(this.conf);
+    }
+
   // CONSTRUCT
-    public AlipayFactory(Properties aConf) {
+    /** Construct a new instance with blank config.
+     */
+    public AlipayFactory()
+    {
+        this.conf = new Properties();
+
+        return;
+    }
+
+    /** Construct a new instance using a resource indicated by <code>resource</code>.
+     */
+    public AlipayFactory(String resource)
+        throws MissingResourceException
+    {
+        this();
+
+        try
+        {
+            this.conf.load(
+                new InputStreamReader(
+                    AlipayFactory.class.getResourceAsStream(resource),
+                    "utf-8"
+            ));
+
+            return;
+        }
+        catch (Exception ex)
+        {
+            MissingResourceException mrex = new MissingResourceException(
+                "Failed to load conf resource.",
+                AlipayFactory.class.getName(),
+                resource
+            );
+            mrex.initCause(ex);
+
+            throw(mrex);
+        }
+    }
+
+    /** Construct a new instance with a prepared config prop.
+     */
+    public AlipayFactory(Properties aConf)
+    {
+        super();
+
         this.conf = aConf;
+
+        return;
     }
 
     /**
@@ -28,45 +79,58 @@ public class AlipayFactory
      * 2. AlipayFactory.class.getResource("/alipay.properties")
      * Properties MUST stored in utf-8.
      */
-    public AlipayFactory()
-        throws MissingResourceException
-    {
-        String res = "";
+    //public AlipayFactory()
+        //throws MissingResourceException
+    //{
+        //String res = "";
 
-        try
-        {
-            res = System.getProperty("com.github.cuter44.alipay.alipay_properties");
-            res = res!=null ? res : RESOURCE_ALIPAY_PROPERTIES;
+        //try
+        //{
+            //res = System.getProperty("com.github.cuter44.alipay.alipay_properties");
+            //res = res!=null ? res : RESOURCE_ALIPAY_PROPERTIES;
 
-            this.conf = new Properties();
-            this.conf.load(
-                new InputStreamReader(
-                    AlipayFactory.class.getResourceAsStream(res),
-                    "utf-8"
-            ));
-        }
-        catch (Exception ex)
-        {
-            MissingResourceException mrex = new MissingResourceException(
-                "Failed to load conf resource.",
-                AlipayFactory.class.getName(),
-                res
-            );
-            mrex.initCause(ex);
+            //this.conf = new Properties();
+            //this.conf.load(
+                //new InputStreamReader(
+                    //AlipayFactory.class.getResourceAsStream(res),
+                    //"utf-8"
+            //));
+        //}
+        //catch (Exception ex)
+        //{
+            //MissingResourceException mrex = new MissingResourceException(
+                //"Failed to load conf resource.",
+                //AlipayFactory.class.getName(),
+                //res
+            //);
+            //mrex.initCause(ex);
 
-            throw(mrex);
-        }
-    }
+            //throw(mrex);
+        //}
+    //}
 
   // SINGLETON
     private static class Singleton
     {
-        public static final AlipayFactory instance = new AlipayFactory();
+        public static final AlipayFactory instance = new AlipayFactory("classpath:/alipay.properties");
     }
 
-    public static AlipayFactory getInstance()
+    /** return default instance which load config from <code>classpath:/alipay.properties</code>.
+     * If you are binding multi-instance of AlipayFactory in your application, DO NOT use this method.
+     */
+    public static AlipayFactory getDefaultInstance()
     {
         return(Singleton.instance);
+    }
+
+    /** @deprecated Please use <code>getDefaultInstance()</code> instead.
+     * This method now forwarded to <code>getDefaultInstance()</code>
+     */
+    public static AlipayFactory getInstance()
+    {
+        return(
+            getDefaultInstance()
+        );
     }
 
   // FACTORY

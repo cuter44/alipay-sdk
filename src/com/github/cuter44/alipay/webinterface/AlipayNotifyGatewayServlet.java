@@ -36,7 +36,7 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
                         ctx.log(n.getString());
                         ctx.log(n.getProperties().toString());
 
-                        ctx.log("verify notify... "+n.verify(new AlipayFactory()));
+                        ctx.log("verify notify... "+n.verify(AlipayFactory.getDefaultInstance().getConf()));
 
                         return(false);
                     }
@@ -44,7 +44,7 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
             );
         }
 
-        if (Boolean.valueOf(config.getInitParameter("com.github.cuter44.alipay.notifygateway.intercept")))
+        if (Boolean.valueOf(config.getInitParameter("com.github.cuter44.alipay.notifygateway.dryrun")))
         {
             this.gateway.addListener(
                 new AlipayNotifyListener(){
