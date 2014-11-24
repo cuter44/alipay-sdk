@@ -6,7 +6,8 @@ import java.util.HashMap;
 public enum NotifyType
 {
   // ENUM
-    trade_status_sync           (1, "trade_status_sync");
+    trade_status_sync           (1, "trade_status_sync"),
+    batch_trans_notify          (2, "batch_trans_notify");
 
   // FIELD
     private int code;

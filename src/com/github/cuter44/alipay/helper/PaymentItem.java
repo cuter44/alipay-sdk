@@ -1,9 +1,10 @@
 package com.github.cuter44.alipay.helper;
 
 import static java.lang.Math.signum;
+import java.util.Date;
 
 public class PaymentItem
-    implements IPaymentItem, IRoyaltyItem
+    implements IPaymentItem, IRoyaltyItem, IPaymentResult
 {
   // FIELDS
     public String sn;
@@ -12,6 +13,10 @@ public class PaymentItem
     public String name;
     public Double amount;
     public String memo;
+
+    public boolean success;
+    public String tradeNo;
+    public Date date;
 
     public void setSn(String newSn)
     {
@@ -99,6 +104,38 @@ public class PaymentItem
         return(this.memo);
     }
 
+    public void setSuccess(boolean newSuccess)
+    {
+        this.success = newSuccess;
+        return;
+    }
+
+    public boolean getSuccess()
+    {
+        return(this.success);
+    }
+
+    public void setTradeNo(String newTradeNo)
+    {
+        this.tradeNo = newTradeNo;
+        return;
+    }
+    public String getTradeNo()
+    {
+        return(this.tradeNo);
+    }
+
+    public void setDate(Date newDate)
+    {
+        this.date = newDate;
+        return;
+    }
+
+    public Date getDate()
+    {
+        return(this.date);
+    }
+
   // CONSTRUCT
     /** constructor for refund
      */
@@ -131,6 +168,22 @@ public class PaymentItem
         this(account, amount, memo);
 
         this.setPayAccount(payAccount);
+
+        return;
+    }
+
+    /** constructor for batch trans result
+     */
+    public PaymentItem(String sn, String account, String name, Double amount, boolean success, String memo, String tradeNo, Date date)
+    {
+        this.setSn(sn);
+        this.setAccount(account);
+        this.setName(name);
+        this.setAmount(amount);
+        this.setSuccess(success);
+        this.setMemo(memo);
+        this.setTradeNo(tradeNo);
+        this.setDate(date);
 
         return;
     }

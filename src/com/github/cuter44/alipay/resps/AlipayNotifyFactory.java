@@ -10,10 +10,23 @@ public class AlipayNotifyFactory
     protected static final String KEY_NOTIFY_TYPE = "notify_type";
 
   // FACTORY
+    /** Return a NotifyBase WITHOUT parsing a query string.
+     */
+    public static NotifyBase newNotifyInstance(String queryString)
+    {
+        return(new NotifyBase(queryString, null));
+    }
+
+    public static NotifyBase newNotifyInstance(Properties prop)
+    {
+        return(newNotifyInstance(null, prop));
+    }
+
+
     /** wrap notify
      * if service not known, it returns a NotifyBase
      */
-    public static NotifyBase newNotifyInstance(Properties prop)
+    public static NotifyBase newNotifyInstance(String queryString, Properties prop)
     {
         String notifyType = prop.getProperty(KEY_NOTIFY_TYPE);
 
@@ -22,6 +35,9 @@ public class AlipayNotifyFactory
 
         if ("trade_status_sync".equals(notifyType))
             return(new TradeStatusSyncNotify(null, prop));
+
+        if ("batch_trans_notify".equals(notifyType))
+            return(new BatchTransNotifyNotify(null, prop));
 
         return(new NotifyBase(null, prop));
     }

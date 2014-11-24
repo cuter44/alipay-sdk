@@ -6,16 +6,18 @@ see LICENSE.md
 
 ## Disclaimer/免责声明
 
-Though I make effort to not steal your money or any secret about your alipay account, or leak to third-party. But I am still not responsable for any direct or indriect lost for your using of these (or part of) source code. It is your responsibility to check any risk before apply them.  
+Though I made effort to not stealing your money or any secret about your alipay account, or leak them to third-party. But I am still not responsable for any direct or indriect lost for your using of these (or part of) source code. It is your responsibility to check any risk before applying them.  
 
 作者不对使用代码所带来的直接或间接损失负责. 由于源代码是公开的, 检查和确保代码的安全性是属于使用者的职责. 请时刻清醒地意识这一点.  
 
 ## Tutorial/教程
 
 Frist of all, ensure you have `jdk` and `apache-ant`.  
-Development environment applied `Oracle-jdk 1.7` and `apache-ant-1.9.2`, all goes well.  
+`Oracle-HotSpot 1.7` and `apache-ant-1.9.2` are applied in development environment, all goes well.  
 
-1. Generated jar file
+Besides, other runtime libraries are required, which are included in `lib` directory.
+
+1. Generate jar file
 
 run `ant jar`
 then there will be the `alipay-sdk-x.y.z.jar` in project root, where xyz is version code.
@@ -28,21 +30,22 @@ the jar-file mentioned above
 
 3. Invoke
 
-demos are provided in `src/com/github/cuter44/test.java`.
+Demos are provided in `src/com/github/cuter44/test.java`. Which can be safely removed if you consider it insecure.
 
 Thanks to GFW, it is such a tough thing to upload binary release to Github. Sorry for that.  
 
-首先, 你要有一个 `jdk` 和 `apache-ant`. 开发环境使用 Oracle家的jdk7 和 ant 1.9.2, 请依个人喜好酌量添加.
+首先, 你要有一个 `jdk` 和 `apache-ant`. 开发环境使用 Oracle家的jdk7 和 ant 1.9.2, 请依个人喜好酌量添加.  
+依赖的函数库被放置于`lib`文件夹中.
 
 1. 编译: 执行 `ant jar`, 然后你就有个jar了....  
 2. 配置: 将那个jar加到你的classpath, 然后还需要一个配置文件, 怎么写参见 `doc/alipay.properties.sample`  
-3. 调用: 参见 `src/com/github/cuter44/test.java`.
+3. 调用: 参见 `src/com/github/cuter44/test.java`. 如果需要安全性, 请排除这个类.
 
 ## Sample/样例
 
 ### Initiative request/主动请求
 
-Where initiative means your app generate links and provides to your customer (BUY ME NOW!), or directly send to alibaba's server to achieve certain action.
+Where initiative means your app generate links and provides to your customer (BUY ME NOW!), or directly send reqs to alibaba's server to achieve certain action.
 
 ```Java
     public static String demoTradeCreateByBuyer()
@@ -50,7 +53,7 @@ Where initiative means your app generate links and provides to your customer (BU
         Random rand = new Random();
 
         try{
-            AlipayFactory factory = new AlipayFactory();
+            AlipayFactory factory = AlipayFactory.getDefaultInstance();
 
             RequestBase req = factory.newTradeCreateByBuyer()
                 .setProperty("out_trade_no",        "test"+rand.nextLong())
@@ -72,7 +75,7 @@ Where initiative means your app generate links and provides to your customer (BU
     }
 ```
 
-All initiiative reqs are handled alike, you should first new a AlipayFactory (to load alipay.properties), then call the factory method you need, Pass additional parameters.  
+All initiiative reqs are handled alike, you should first obtain an AlipayFactory singleton(to load alipay.properties, also you can "new" one then config programmatically), then call the factory method you need, Pass additional parameters.  
 And the rest are in one breath. You should sequentially call `.build().sign().toURL()`(if you need to put it on html) or `build().sign().execute()`(...if it is executed on server-side, according to alipay's specification).
 
 If executed, the `execute()` method returns a response in correponding class (need manual casting), which has the response parsed in key-value pairs. As of the to-url-requests, a UnsupportedOperationException will be thrown.
@@ -83,7 +86,7 @@ If executed, the `execute()` method returns a response in correponding class (ne
 (代码见上)
 ```
 
-主动请求的操作方法基本类同, 首先要new一个AlipayFactory(加载配置文件); 然后使用工厂方法构建你想要的请求; 往请求里填参数...  
+主动请求的操作方法基本类同, 首先要构建一个AlipayFactory(加载配置文件, 或者编程地配置它); 然后使用工厂方法构建你想要的请求; 往请求里填参数...  
 然后就简单了, `.build().sign().toURL()` 用于生成链接并嵌入到页面, 或者 `.build().sign().execute()` 直接执行(视支付宝文档而定).
 
 可执行的请求会在执行后返回一个响应, 里面包含解析成键值对的信息; 不应该在服务器端执行的请求会被以 `UnsupportedOperationException` 吐槽.

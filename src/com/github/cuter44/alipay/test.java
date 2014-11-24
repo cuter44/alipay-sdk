@@ -229,9 +229,11 @@ public class test
                     new PaymentDetailList(
                         new PaymentItem(Long.toString(abs(rand.nextLong())), "cuter44@qq.com",   "吴嘉林", 0.01, "支付宝商家付款测试, 么么哒"),
                         new PaymentItem(Long.toString(abs(rand.nextLong())), "18825180163",      "陈晓杰", 0.01, "支付宝商家付款测试, 么么哒"),
-                        new PaymentItem(Long.toString(abs(rand.nextLong())), "468859947@qq.com", "黄文杰", 0.01, "支付宝商家付款测试, 么么哒"),
-                        new PaymentItem(Long.toString(abs(rand.nextLong())), "18814127437",      "陈蔓青", 0.01, "支付宝商家付款测试, 么么哒"),
-                        new PaymentItem(Long.toString(abs(rand.nextLong())), "13538805651",      "马楚鸿", 0.01, "支付宝商家付款测试, 么么哒")
+                        //new PaymentItem(Long.toString(abs(rand.nextLong())), "468859947@qq.com", "黄文杰", 0.01, "支付宝商家付款测试, 么么哒"),
+                        //new PaymentItem(Long.toString(abs(rand.nextLong())), "18814127437",      "陈蔓青", 0.01, "支付宝商家付款测试, 么么哒"),
+                        //new PaymentItem(Long.toString(abs(rand.nextLong())), "cuter44@qq.com",   "吴嘉林", -0.01, "金额不正确的用例"),
+                        new PaymentItem(Long.toString(abs(rand.nextLong())), "468859947@qq.com", "0xDEADDEAD", 0.01, "名字不正确的用例"),
+                        new PaymentItem(Long.toString(abs(rand.nextLong())), "0xDEADDEAD",      "陈蔓青", 0.01, "帐号不正确的用例")
                     )
                 )
                 .setProperty("batch_no",        "batch"+abs(rand.nextLong()))
@@ -327,7 +329,8 @@ public class test
                 .setProperty("out_trade_no",        "nyaguru"+rand.nextLong())
                 .setProperty("subject",             "捐赠给支付宝SDK作者")
                 .setProperty("payment_type",        "1")
-                .setProperty("total_fee",           "1.01");
+                .setProperty("total_fee",           "1.01")
+                .setProperty("notify_url",          "http://weixin.uutime.cn/nyagalin/gateway");
 
             return(req.build().sign().toURL());
         }
@@ -362,9 +365,9 @@ public class test
         //browserOpen(demoCreateDirectPayByUserBank());
 
         // TESTCASE 8
-        //browserOpen(
-            //demoBatchTransNotify()
-        //);
+        browserOpen(
+            demoBatchTransNotify()
+        );
 
         // TESTCASE 9
         //browserOpen(
@@ -380,8 +383,8 @@ public class test
         // As LICENSE.md states, a postcard is more preferred.
         // But if you are too busy, there is an alternative...
         // After all, thanks~
-        browserOpen(
-            donateToAuthor()
-        );
+        //browserOpen(
+            //donateToAuthor()
+        //);
     }
 }

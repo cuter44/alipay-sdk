@@ -31,12 +31,15 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
                     @Override
                     public boolean handle(NotifyBase n)
                     {
-                        ServletContext ctx = AlipayNotifyGatewayServlet.this.getServletContext();
+                        //ServletContext ctx = AlipayNotifyGatewayServlet.this.getServletContext();
 
-                        ctx.log(n.getString());
-                        ctx.log(n.getProperties().toString());
+                        //ctx.log(n.getString());
+                        System.out.println(n.getString());
+                        //ctx.log(n.getProperties().toString());
+                        System.out.println(n.getProperties().toString());
 
-                        ctx.log("verify notify... "+n.verify(AlipayFactory.getDefaultInstance().getConf()));
+                        //ctx.log("verify notify... "+n.verify(AlipayFactory.getDefaultInstance().getConf()));
+                        //System.out.println("verify notify... "+n.verify(AlipayFactory.getDefaultInstance().getConf()));
 
                         return(false);
                     }
@@ -78,7 +81,7 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
         if (queryProp.containsKey(KEY_NOTIFY_DATA))
             queryProp.putAll(parseXML(queryProp.getProperty(KEY_NOTIFY_DATA)));
 
-        NotifyBase n = new NotifyBase(null, queryProp);
+        NotifyBase n = AlipayNotifyFactory.newNotifyInstance(req.getQueryString(), queryProp);
 
         if (gateway.publish(n))
             out.print("success");

@@ -23,7 +23,7 @@ public abstract class WapRequestBase extends RequestBase
     public static final String KEY_RES_DATA         = "res_data";
     public static final String KEY_RES_ERROR        = "res_error";
     public static final String KEY_RES_ERROR_MSG    = "msg";
-    public static final String URL_ALIPAY_GATEWAY       = "http://wappaygw.alipay.com/service/rest.htm";
+    public static final String URL_ALIPAY_GATEWAY   = "http://wappaygw.alipay.com/service/rest.htm";
 
   // CONSTRUCT
     public WapRequestBase(Properties aConf)
@@ -120,8 +120,6 @@ public abstract class WapRequestBase extends RequestBase
                 .asString();
 
             Properties prop = parseHttpParam(params);
-            prop.putAll(parseXML(prop.getProperty(KEY_RES_DATA)));
-
             if (prop.getProperty(KEY_RES_ERROR)!=null)
                 throw(
                     new AlipayException(
@@ -129,6 +127,8 @@ public abstract class WapRequestBase extends RequestBase
                             .toUpperCase()
                             .replace(' ','_')
                 ));
+            // else
+            prop.putAll(parseXML(prop.getProperty(KEY_RES_DATA)));
 
             return(new ResponseBase(params, prop));
         }

@@ -10,17 +10,17 @@ import com.github.cuter44.alipay.helper.*;
 
 public class TradeStatusSyncNotify extends NotifyBase
 {
-    public static final String KEY_OUT_TRADE_NO = "out_trade_no";
-    public static final String KEY_TRADE_NO = "trade_no";
-    public static final String KEY_TRADE_STATUS = "trade_status";
-    public static final String KEY_BUYER_ID = "buyer_id";
-    public static final String KEY_BUYER_EMAIL = "buyer_email";
-    public static final String KEY_SELLER_ID = "seller_id";
-    public static final String KEY_SELLER_EMAIL = "seller_email";
+    public static final String KEY_OUT_TRADE_NO         = "out_trade_no";
+    public static final String KEY_TRADE_NO             = "trade_no";
+    public static final String KEY_TRADE_STATUS         = "trade_status";
+    public static final String KEY_BUYER_ID             = "buyer_id";
+    public static final String KEY_BUYER_EMAIL          = "buyer_email";
+    public static final String KEY_SELLER_ID            = "seller_id";
+    public static final String KEY_SELLER_EMAIL         = "seller_email";
 
-    public static final String KEY_LOGISTICS_TYPE = "logistics_type";
-    public static final String KEY_LOGISTICS_FEE = "logistics_fee";
-    public static final String KEY_LOGISTICS_PAYMENT = "logistics_payment";
+    public static final String KEY_LOGISTICS_TYPE       = "logistics_type";
+    public static final String KEY_LOGISTICS_FEE        = "logistics_fee";
+    public static final String KEY_LOGISTICS_PAYMENT    = "logistics_payment";
 
     public static final List<String> KEYS_PARAM_NAME = Arrays.asList(
         "body",
@@ -71,6 +71,7 @@ public class TradeStatusSyncNotify extends NotifyBase
   // VERIFY
     @Override
     public boolean verifyNotifySign(Properties conf)
+        throws UnsupportedEncodingException
     {
         return(
             super.verifyNotifySign(KEYS_PARAM_NAME, conf)

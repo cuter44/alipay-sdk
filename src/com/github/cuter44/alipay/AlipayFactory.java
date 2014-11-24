@@ -112,10 +112,10 @@ public class AlipayFactory
   // SINGLETON
     private static class Singleton
     {
-        public static final AlipayFactory instance = new AlipayFactory("classpath:/alipay.properties");
+        public static final AlipayFactory instance = new AlipayFactory("/alipay.properties");
     }
 
-    /** return default instance which load config from <code>classpath:/alipay.properties</code>.
+    /** return default instance which load config from <code>/alipay.properties</code>.
      * If you are binding multi-instance of AlipayFactory in your application, DO NOT use this method.
      */
     public static AlipayFactory getDefaultInstance()

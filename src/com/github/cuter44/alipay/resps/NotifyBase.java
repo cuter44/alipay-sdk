@@ -88,30 +88,25 @@ public class NotifyBase extends ResponseBase
     }
 
     protected boolean verifyNotifySign(List<String> paramNames, Properties conf)
+        throws UnsupportedEncodingException
     {
-        try
-        {
-            String stated = this.getProperty("sign");
-            String calculated = this.sign(
-                paramNames,
-                this.getProperty("sign_type"),
-                conf.getProperty("KEY"),
-                "utf-8"
-            );
+        String stated = this.getProperty("sign");
+        String calculated = this.sign(
+            paramNames,
+            this.getProperty("sign_type"),
+            conf.getProperty("KEY"),
+            conf.getProperty("_input_charset")
+        );
 
-            return(
-                stated!=null && stated.equals(calculated)
-            );
-        }
-        catch (UnsupportedEncodingException ex)
-        {
-            throw(new RuntimeException(ex.getMessage(), ex));
-        }
+        return(
+            stated!=null && stated.equals(calculated)
+        );
     }
 
     /** 继承者应该实现这个方法以验证签名
      */
     public boolean verifyNotifySign(Properties conf)
+        throws UnsupportedEncodingException, UnsupportedOperationException
     {
         throw(new UnsupportedOperationException("Don't know which params should be signed."));
     }
@@ -135,6 +130,7 @@ public class NotifyBase extends ResponseBase
      */
     @Deprecated
     public boolean verify(AlipayFactory factory)
+        throws UnsupportedEncodingException
     {
         return(
             this.verify(
@@ -144,6 +140,7 @@ public class NotifyBase extends ResponseBase
     }
 
     public boolean verify(Properties conf)
+        throws UnsupportedEncodingException
     {
         if (this.validity != null)
             return(this.validity);
@@ -196,7 +193,7 @@ public class NotifyBase extends ResponseBase
             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 .parse(
                     this.respProp.getProperty(KEY_NOTIFY_TIME),
-                    new ParsePosition(1)
+                    new ParsePosition(0)
                 )
         );
     }
