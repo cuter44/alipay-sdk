@@ -19,7 +19,7 @@
   <property name="dtlibdir" value="lib" />
   <property name="javadocdir" value="javadoc" />
   <property name="destdir" value="bin" />
-  <property name="version" value="3.0.0-pre1" />
+  <property name="version" value="3.0.1-pre1" />
 
   <path id="classpath">
     <!-- lib 存放开发及测试用库 -->

@@ -1,6 +1,10 @@
 # 支付宝服务器端SDK for Java / alipay seller-side sdk for Java  
 
-## License/授权
+## Release
+
+...can be found in https://github.com/cuter44/wxpay-sdk/releases
+
+## License & Acknokledgement/授权 & 鸣谢
 
 see LICENSE.md
 
@@ -25,8 +29,9 @@ then there will be the `alipay-sdk-x.y.z.jar` in project root, where xyz is vers
 2. Config
 
 add these to your classpath:
-the jar-file mentioned above
-`alipay.properties`, whose schema are provided in `doc/alipay.properties.sample`
+* the jar-file mentioned above
+* jar-files in `lib/`, which are depended
+* `alipay.properties`, whose schema are provided in `doc/alipay.properties.sample`
 
 3. Invoke
 
@@ -38,10 +43,24 @@ Thanks to GFW, it is such a tough thing to upload binary release to Github. Sorr
 依赖的函数库被放置于`lib`文件夹中.
 
 1. 编译: 执行 `ant jar`, 然后你就有个jar了....  
-2. 配置: 将那个jar加到你的classpath, 然后还需要一个配置文件, 怎么写参见 `doc/alipay.properties.sample`  
+2. 配置: 将那个jar以及 `lib/` 里的jar加到你的classpath, 然后还需要一个配置文件, 怎么写参见 `doc/alipay.properties.sample`  
 3. 调用: 参见 `src/com/github/cuter44/test.java`. 如果需要安全性, 请排除这个类.
 
-## Sample/样例
+## Tutorial/说明
+
+### Configurate/配置  
+
+`doc/alipay.properties.sample` provides a sample config file. Comments in that file instruct what you should do with that.
+
+`doc/alipay.properties.sample` 是一份样例操作文件. 关于如何使用该配置文件请参照其中的注释.
+
+### Factory/工厂方法
+
+This SDK provides factory object to easily create requests. This factory reads `alipay.properties` mentioned above and use them as default config, code in next section demostrate how it works.  
+This mechanism works profectly if you are using a unique alipay enterprise account. Otherwise you may not use a config file but create and config factories/requests programtically (using `new`).
+
+SDK 中提供了一个工厂方法用于快速地创建请求. 这个工厂方法读取 `alipay.properties` 并将之传递给请求作为默认参数(可以在运行时被覆盖)  
+工厂方法适用于单实例的时候. 如果你的系统需要集成多个商家帐号, 则你需要编程创建并自行维护工厂对象或单个请求(使用其构造器而不是 `getDefaultInstance()`)
 
 ### Initiative request/主动请求
 

@@ -17,7 +17,7 @@ public class AlipayNotifyGatewayServlet extends HttpServlet
     protected static final String KEY_NOTIFY_DATA = "notify_data";
     //private ServletContext context = this.getServletContext();
 
-    protected AlipayNotifyPublisher gateway = new AlipayNotifyPublisher();
+    protected AlipayNotifyPublisher gateway = AlipayNotifyPublisher.getDefaultInstance();
 
     // FOR TEST ONLY
     // QUOTE ME ON PRODUCE ENVIRONMENT

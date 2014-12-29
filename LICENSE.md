@@ -10,3 +10,9 @@ Guangzhou, Guangdong 510000
 China  
 
 Contributors would add name/address to the credit list.
+
+<hr />
+Also names below are memorized and honoured:  
+
+_xillkey_ , talented programmer, tons of bug-shooting and sample data.  
+_kuangyj_ , boss, sponsor for a alipay enterprise account.

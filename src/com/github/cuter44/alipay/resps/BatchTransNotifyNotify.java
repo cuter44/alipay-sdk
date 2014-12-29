@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.text.SimpleDateFormat;
-import java.text.ParsePosition;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 
 import com.github.cuter44.alipay.constants.*;
 import com.github.cuter44.alipay.helper.*;
@@ -95,23 +95,29 @@ public class BatchTransNotifyNotify extends NotifyBase
 
         for (String item:items)
         {
-            String[] values = item.split("\\^");
-            if (values.length == 1)
-                continue;
+            try
+            {
+                String[] values = item.split("\\^");
+                if (values.length == 1)
+                    continue;
 
-            PaymentItem pi = new PaymentItem(
-                values[0],
-                values[1],
-                values[2],
-                Double.valueOf(values[3]),
-                "S".equals(values[4]),
-                null,
-                values[6],
-                df.parse(values[7], new ParsePosition(0))
+                PaymentItem pi = new PaymentItem(
+                    values[0],
+                    values[1],
+                    values[2],
+                    Double.valueOf(values[3]),
+                    "S".equals(values[4]),
+                    null,
+                    values[6],
+                    df.parse(values[7])
+                );
 
-            );
-
-            l.add(pi);
+                l.add(pi);
+            }
+            catch (ParseException ex)
+            {
+                ex.printStackTrace();
+            }
         }
 
         this.successDetails = l;

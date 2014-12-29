@@ -72,6 +72,7 @@ public class CreatePartnerTradeByBuyer extends WebRequestBase
     }
 
   // TO_URL
+    @Override
     public String toURL()
         throws UnsupportedEncodingException
     {

@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.text.ParsePosition;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 
 import com.github.cuter44.util.crypto.CryptoUtil;
 import com.github.cuter44.util.text.URLBuilder;
@@ -87,7 +87,7 @@ public class NotifyBase extends ResponseBase
         return(ub.toString());
     }
 
-    protected boolean verifyNotifySign(List<String> paramNames, Properties conf)
+    public boolean verifyNotifySign(List<String> paramNames, Properties conf)
         throws UnsupportedEncodingException
     {
         String stated = this.getProperty("sign");
@@ -103,9 +103,10 @@ public class NotifyBase extends ResponseBase
         );
     }
 
-    /** 继承者应该实现这个方法以验证签名
+    /** 子类应该实现这个方法以验证签名
+     * SUB-CLASS MUST IMPLEMENT THIS METHOD TO BE CALLBACKED.
      */
-    public boolean verifyNotifySign(Properties conf)
+    protected boolean verifyNotifySign(Properties conf)
         throws UnsupportedEncodingException, UnsupportedOperationException
     {
         throw(new UnsupportedOperationException("Don't know which params should be signed."));
@@ -187,14 +188,15 @@ public class NotifyBase extends ResponseBase
         );
     }
 
+    /**
+     * exception ParseException while format is incorrect
+     */
     public Date getNotifyTime()
+        throws ParseException
     {
         return(
             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                .parse(
-                    this.respProp.getProperty(KEY_NOTIFY_TIME),
-                    new ParsePosition(0)
-                )
+                .parse(this.respProp.getProperty(KEY_NOTIFY_TIME))
         );
     }
 

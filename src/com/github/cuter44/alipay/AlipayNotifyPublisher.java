@@ -19,6 +19,20 @@ public class AlipayNotifyPublisher
         return;
     }
 
+  // SINGLETON
+    private static class Singleton
+    {
+        public static AlipayNotifyPublisher instance = new AlipayNotifyPublisher();
+    }
+
+
+    public static AlipayNotifyPublisher getDefaultInstance()
+    {
+        return(
+            this.Singleton.instance
+        );
+    }
+
   // EVENTQUEUE
     public void addListener(AlipayNotifyListener l)
     {

@@ -6,7 +6,7 @@ sign_type=MD5
 sec_id=MD5
 
 # NAME
-account_name=your_company_name
+account_name=# fill your company name here, which MUST be same as the one you registered on alipay.com
 
 # PID
 # PID not actually used, fill other parameter follow this↓ sample
